@@ -92,6 +92,7 @@ contract ForkTest is Test {
     function test_fork_submitFeeAndCaps() public {
         address p = agent();
         uint256 fee = reg.tapeOutFee(2);
+        uint256 fee89 = reg.tapeOutFee(89);
         assertEq(fee, reg.cpu().TAPEOUT_FEE());
         vm.startPrank(p);
         vm.expectRevert(abi.encodeWithSelector(CircuitRegistry.WrongFee.selector, fee, fee + 1));
@@ -99,7 +100,7 @@ contract ForkTest is Test {
         vm.expectRevert(abi.encodeWithSelector(CircuitRegistry.WrongFee.selector, fee, fee - 1));
         reg.submitCircuit{value: fee - 1}(Fixtures.TIT_FOR_TAT);
         vm.expectRevert(abi.encodeWithSelector(CircuitRegistry.TooManyGates.selector, 89));
-        reg.submitCircuit{value: reg.tapeOutFee(89)}(Fixtures.GATES_89);
+        reg.submitCircuit{value: fee89}(Fixtures.GATES_89);
         vm.expectRevert(CircuitRegistry.BadNetlist.selector);
         reg.submitCircuit{value: fee}(hex"0100000200000500000008000008"); // LATCH opcode
         vm.expectRevert(CircuitRegistry.BadNetlist.selector);
