@@ -24,7 +24,7 @@ const REGISTRY = "0x93280c16C56ff2e2A2Fc344Db868Fabea9aeC2c9";
 const PROCESSOR = "0xDaC12492090F0937B6aAAd3De13E39114f18dA65";
 const AGENT_ID = "0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F";
 const START_BLOCK = BigInt(E.START_BLOCK ?? "134479030");
-const CHUNK = 1000n; // thirdweb public RPC: max 1000 blocks per getLogs
+const CHUNK = 500n; // stays under every public RPC limit we use (thirdweb 1000, 48club/publicnode ok)
 const POLL_MS = 15_000;
 const KEEPER_MS = 30_000;
 const LOG = new URL("../keeper.log", import.meta.url);
@@ -56,7 +56,27 @@ const agentAbi = parseAbi(["function handleOf(address) view returns (string)"]);
 const TIERS = ["ROOKIE", "PRO", "CHAMPION"];
 const STATES = ["NONE", "OPEN", "FULL", "SETTLED", "EXPIRED"];
 
-const indexClient = createPublicClient({ chain: bsc, transport: http(E.INDEX_RPC_URL ?? "https://56.rpc.thirdweb.com") });
+// getLogs needs RPCs that allow ranges; public ones rate-limit, so rotate and fail over immediately (no silent retries).
+const INDEX_RPCS = (E.INDEX_RPC_URLS ?? E.INDEX_RPC_URL ?? "https://rpc-bsc.48.club,https://bsc.publicnode.com,https://56.rpc.thirdweb.com")
+  .split(",")
+  .map((u) => u.trim())
+  .filter(Boolean);
+const indexClients = INDEX_RPCS.map((u) => createPublicClient({ chain: bsc, transport: http(u, { retryCount: 0, timeout: 15_000 }) }));
+let rpcIdx = 0;
+async function withIndexRpc(fn) {
+  let lastErr;
+  for (let k = 0; k < indexClients.length; k++) {
+    const i = (rpcIdx + k) % indexClients.length;
+    try {
+      const r = await fn(indexClients[i]);
+      rpcIdx = i;
+      return r;
+    } catch (e) {
+      lastErr = e;
+    }
+  }
+  throw lastErr;
+}
 const client = createPublicClient({ chain: bsc, transport: http(E.TX_RPC_URL ?? "https://bsc-dataseed.bnbchain.org") });
 
 // ---------------------------------------------------------------- db
@@ -82,12 +102,12 @@ const log = (...a) => {
 
 // ---------------------------------------------------------------- indexer
 async function indexOnce() {
-  const head = (await indexClient.getBlockNumber()) - 2n;
+  const head = (await withIndexRpc((c) => c.getBlockNumber())) - 2n;
   let from = BigInt(getMeta("lastBlock") ?? START_BLOCK - 1n) + 1n;
   const ins = db.prepare("INSERT OR IGNORE INTO events VALUES (?,?,?,?,?,?,?)");
   while (from <= head) {
     const to = from + CHUNK - 1n > head ? head : from + CHUNK - 1n;
-    const logs = await indexClient.getLogs({ address: [ARENA, REGISTRY], fromBlock: from, toBlock: to });
+    const logs = await withIndexRpc((c) => c.getLogs({ address: [ARENA, REGISTRY], fromBlock: from, toBlock: to }));
     for (const l of logs) {
       const abi = l.address.toLowerCase() === ARENA.toLowerCase() ? arenaAbi : registryAbi;
       try {
@@ -256,7 +276,10 @@ const account = E.KEEPER_PRIVATE_KEY ? privateKeyToAccount(E.KEEPER_PRIVATE_KEY)
 const wallet = account ? createWalletClient({ account, chain: bsc, transport: http(E.TX_RPC_URL ?? "https://bsc-dataseed.bnbchain.org") }) : null;
 const tried = new Map(); // game -> last attempt time (avoid hammering a reverting call)
 
+const DISABLE_FILE = new URL("../keeper.disabled", import.meta.url); // created/removed by the admin page
+
 async function keeperOnce() {
+  if (existsSync(DISABLE_FILE)) return; // turned off from /admin
   const next = Number(await client.readContract({ address: ARENA, abi: arenaAbi, functionName: "nextGameId" }));
   const now = Math.floor(Date.now() / 1000);
   for (let id = 1; id < next; id++) {
