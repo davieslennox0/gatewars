@@ -1,6 +1,7 @@
 import { createConfig, http } from "wagmi";
 import { bsc } from "wagmi/chains";
-import { injected, walletConnect } from "wagmi/connectors";
+import { injected } from "@wagmi/core";
+import { walletConnect } from "wagmi/connectors";
 
 const wc = process.env.NEXT_PUBLIC_WC_PROJECT_ID;
 
