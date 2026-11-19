@@ -1,0 +1,9 @@
+{
+  "name": "gatewars",
+  "private": true,
+  "workspaces": ["packages/*", "apps/*", "skills/*"],
+  "scripts": {
+    "test:compiler": "npm -w @gatewars/compiler test",
+    "build:compiler": "npm -w @gatewars/compiler run build"
+  }
+}

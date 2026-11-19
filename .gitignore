@@ -6,3 +6,9 @@ broadcast/
 node_modules/
 __pycache__/
 deployments/*.dryrun.json
+node_modules/
+dist/
+.next/
+apps/web/out/
+*.sqlite
+*.sqlite-*
