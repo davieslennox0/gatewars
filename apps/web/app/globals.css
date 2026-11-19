@@ -278,3 +278,7 @@ footer.foot a { color: var(--coop); }
 /* mobile chip fit (390px): narrower pin labels, never wider than the card */
 .chipwrap { max-width: 100%; }
 @media (max-width: 480px) { .pinlabel { width: 74px; font-size: 10px; } .pin { width: 12px; } .pinrow { gap: 4px; } }
+/* DuelScope header must wrap on narrow screens (was pushing the page to 394px at 390) */
+.scope { overflow: hidden; min-width: 0; }
+.scope-head { flex-wrap: wrap; }
+.scope-head > span:first-child { min-width: 0; overflow-wrap: anywhere; }
