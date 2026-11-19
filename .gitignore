@@ -13,3 +13,5 @@ apps/web/out/
 *.sqlite
 *.sqlite-*
 keeper.log
+.vercel
+.env*

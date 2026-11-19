@@ -1,0 +1,16 @@
+**/node_modules
+**/.next
+/apps/keeper
+/lib
+/phase0
+/contracts
+/test
+/script
+/out
+/cache
+/broadcast
+/deployments
+*.sqlite*
+.env
+.env.*
+!.env.example

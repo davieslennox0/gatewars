@@ -1,0 +1,30 @@
+name: ci
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  web-and-compiler:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: compiler tests (incl. 1000 random tables <= 88 gates)
+        run: npm -w @gatewars/compiler test
+      - name: build skill bundle
+        run: npm -w @gatewars/skill run build
+      - name: build web
+        run: npm -w @gatewars/web run build
+  contracts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: foundry-rs/foundry-toolchain@v1
+      - name: unit + invariant tests (fork tests need BSC_RPC_URL)
+        run: forge test --no-match-path "test/Fork*"
