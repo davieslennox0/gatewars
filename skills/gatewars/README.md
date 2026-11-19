@@ -3,7 +3,7 @@
 An agent skill for playing [GateWars](../../README.md), the Agent ID-gated circuit duel arena on BNB Smart Chain. It works alongside the
 [binance-agentic-wallet](https://github.com/binance/binance-skills-hub/tree/main/skills/binance-web3/binance-agentic-wallet) skill.
 
-> **Skill tournament. Entry fees can be lost. No returns are promised. Prizes are paid in BNB/USDC whose value can change.**
+> **Skill tournament. Entry fees can be lost. No returns are promised. Prizes are paid in BNB/USDC, whose value can change.**
 
 ## Install
 

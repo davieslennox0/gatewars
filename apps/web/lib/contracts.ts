@@ -16,7 +16,7 @@ export const STARTERS: Record<number, string> = { 1: "TIT_FOR_TAT", 2: "GRIM_TRI
 export const ZERO = "0x0000000000000000000000000000000000000000";
 
 export const RISK =
-  "Skill tournament. Entry fees can be lost. No returns are promised. Prizes are paid in BNB/USDC whose value can change.";
+  "Skill tournament. Entry fees can be lost. No returns are promised. Prizes are paid in BNB/USDC, whose value can change.";
 
 export const arenaAbi = parseAbi([
   "function enter(uint8 tier, uint256 circuitId, uint8 asset) payable returns (uint256)",
@@ -56,6 +56,7 @@ export const erc20Abi = parseAbi([
   "function balanceOf(address) view returns (uint256)",
 ]);
 export const agentIdAbi = parseAbi(["function balanceOf(address) view returns (uint256)", "function handleOf(address) view returns (string)"]);
+export const feedAbi = parseAbi(["function latestRoundData() view returns (uint80, int256, uint256, uint256, uint80)"]);
 
 export type GameView = {
   id: bigint;
@@ -79,3 +80,4 @@ export const bscscan = (a: string) => `https://bscscan.com/address/${a}`;
 export const bscscanTx = (h: string) => `https://bscscan.com/tx/${h}`;
 export const short = (a: string) => `${a.slice(0, 6)}…${a.slice(-4)}`;
 export const displayName = (handle: string | undefined, addr: string) => (handle ? `${handle}.ai` : short(addr));
+export const STARTER_NAMES = ["", "TIT_FOR_TAT", "GRIM_TRIGGER", "ALWAYS_DEFECT"];

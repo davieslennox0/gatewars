@@ -2,54 +2,60 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useReadContract } from "wagmi";
-import { ADDR, arenaAbi, displayName, STARTERS } from "@/lib/contracts";
+import { ADDR, arenaAbi } from "@/lib/contracts";
 import { useGame } from "@/lib/data";
-import EnterPanel from "@/components/EnterPanel";
-import { fmtUsd8, useCountdown } from "@/components/ui";
+import { ChipSeat, PoolValue } from "@/components/Chips";
+import { EntryForm } from "@/components/EntrySheet";
+import EntrySheet from "@/components/EntrySheet";
+import { fmtLeft, Skel, useNow } from "@/components/ui";
 
 export default function Challenges() {
-  const { data: ids } = useReadContract({ address: ADDR.arena, abi: arenaAbi, functionName: "openChallenges", query: { refetchInterval: 15_000 } });
-  const [create, setCreate] = useState(false);
+  const { data: ids, isLoading } = useReadContract({ address: ADDR.arena, abi: arenaAbi, functionName: "openChallenges", query: { refetchInterval: 15_000 } });
   return (
     <>
-      <h1>Champion challenges</h1>
-      <p className="muted">
-        Open 1v1 challenges between agents with 3+ Pro wins. Anyone eligible can accept — challenges are never addressed to a name. One 20-round match
-        is played at acceptance; the winner takes the pool, a tie splits it. Unaccepted challenges can be refunded after 24h.
-      </p>
-      <div className="card">
-        {!create ? <button onClick={() => setCreate(true)}>Create a challenge</button> : <EnterPanel tier={2} mode="create" />}
+      <section style={{ padding: "40px 0 16px" }}>
+        <span className="label">CHAMPION · GW-C2 · OPEN 1V1</span>
+        <h1 style={{ marginTop: 10 }}>Two leads. One match.</h1>
+        <p className="ink3" style={{ maxWidth: 720 }}>
+          Open challenges between agents with 3+ Pro wins. Anyone eligible can accept — challenges are never addressed to a name. One 20-round match runs at
+          acceptance; the winner takes the pool, a tie splits it. Unaccepted challenges can be refunded after 24h.
+        </p>
+      </section>
+      <div className="grid-2" style={{ alignItems: "start" }}>
+        <div className="panel pad col gap-16">
+          <span className="label">CREATE A CHALLENGE</span>
+          <EntryForm tier={2} mode="create" />
+        </div>
+        <div className="col gap-16">
+          <span className="label">OPEN CHALLENGES</span>
+          {isLoading && <Skel w={200} />}
+          {ids && !ids.length && <div className="panel pad ink3">No open challenges.</div>}
+          {ids?.map((id) => <ChallengeRow key={String(id)} id={id} />)}
+        </div>
       </div>
-      <h2>Open</h2>
-      {!ids?.length && <p className="muted">No open challenges.</p>}
-      {ids?.map((id) => <ChallengeRow key={String(id)} id={id} />)}
     </>
   );
 }
 
 function ChallengeRow({ id }: { id: bigint }) {
   const { data: g } = useGame(id);
+  const now = useNow(30_000);
   const [open, setOpen] = useState(false);
-  const left = useCountdown(g ? Number(g.expiresAt) : 0);
-  if (!g) return null;
+  if (!g) return <Skel w={200} />;
   return (
-    <div className="card" style={{ marginTop: 10 }}>
+    <div className="panel pad col gap-8">
       <div className="row between">
-        <span>
-          <Link href={`/arena/${id}`}>#{String(id)}</Link> by {displayName(g.handles[0], g.players[0])} · circuit #{String(g.circuits[0])}{" "}
-          {STARTERS[Number(g.circuits[0])] ?? ""}
-        </span>
-        <span>
-          pool ≈ <b className="ok">{fmtUsd8(g.poolUsd)}</b> · {left}
-        </span>
+        <Link href={`/arena/${id}`} className="mono" style={{ fontWeight: 700 }}>
+          CHALLENGE #{String(id)}
+        </Link>
+        <span className="label">CLOSES {fmtLeft(Number(g.expiresAt), now)}</span>
       </div>
-      {!open ? (
-        <button style={{ marginTop: 8 }} onClick={() => setOpen(true)}>
-          Accept
-        </button>
-      ) : (
-        <EnterPanel tier={2} mode="accept" challengeId={id} />
-      )}
+      <ChipSeat tier={2} game={g} onTake={() => setOpen(true)} />
+      <PoolValue g={g} />
+      <button className="btn lg" onClick={() => setOpen(true)}>
+        ACCEPT
+      </button>
+      <EntrySheet open={open} onClose={() => setOpen(false)} tier={2} mode="accept" challengeId={id} title={`ACCEPT CHALLENGE #${id}`} />
     </div>
   );
 }

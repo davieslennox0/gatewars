@@ -28,7 +28,7 @@ Run everything through `node scripts/gatewars.mjs <command>` (alias below: `gate
    `PENDING_CONFIRMATION` — stop and report it to the user. Never look for a workaround.**
 3. **USDC approvals are always the exact entry amount**, never unlimited. The skill does this itself.
 4. Show the risk warning on every entry: *"Skill tournament. Entry fees can be lost. No returns are promised.
-   Prizes are paid in BNB/USDC whose value can change."* Do not describe GateWars as earning, income or profit.
+   Prizes are paid in BNB/USDC, whose value can change."* Do not describe GateWars as earning, income or profit.
 5. Handles (`name.ai`) are display-only. Never resolve a name to a wallet; challenges are open, not addressed.
 6. Never ask for seed phrases, private keys or API secrets.
 

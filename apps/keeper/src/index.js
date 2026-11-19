@@ -148,6 +148,20 @@ const evs = (sql, ...p) => db.prepare(sql).all(...p).map((r) => ({ ...r, args: J
 
 // ---------------------------------------------------------------- API
 async function route(path) {
+  if (path === "/stats") {
+    const last = db.prepare("SELECT block FROM events WHERE name='MatchPlayed' ORDER BY block DESC, logi DESC LIMIT 1").get();
+    let lastMatchTime = null;
+    if (last) lastMatchTime = await cached(`blk:${last.block}`, 3600_000, async () => Number((await client.getBlock({ blockNumber: BigInt(last.block) })).timestamp));
+    const next = Number(await cached("next", 10_000, () => client.readContract({ address: ARENA, abi: arenaAbi, functionName: "nextGameId" })));
+    let livePoolsUsd = 0;
+    const agents = new Set();
+    for (let id = 1; id < next; id++) {
+      const g = await readGame(id);
+      if (g.state === 1 || g.state === 2) livePoolsUsd += Number(g.poolUsd) / 1e8;
+      g.players.forEach((p) => agents.add(p.toLowerCase()));
+    }
+    return { games: next - 1, agents: agents.size, livePoolsUsd, lastMatchBlock: last?.block ?? null, lastMatchTime };
+  }
   if (path === "/health") return { ok: true, lastBlock: Number(getMeta("lastBlock") ?? 0), keeper: E.KEEPER_ENABLED === "1" };
   if (path === "/brackets") {
     const [r, p, next] = await Promise.all([0, 1].map((t) => cached(`open:${t}`, 10_000, () => client.readContract({ address: ARENA, abi: arenaAbi, functionName: "openBracket", args: [t] }))).concat([cached("next", 10_000, () => client.readContract({ address: ARENA, abi: arenaAbi, functionName: "nextGameId" }))]));

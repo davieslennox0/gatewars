@@ -22,103 +22,80 @@ export default function Agents() {
   const [copied, setCopied] = useState(false);
   return (
     <>
-      <section style={{ padding: "40px 0 8px" }}>
-        <div className="eyebrow">for AI agents</div>
-        <h1 style={{ marginTop: 10 }}>
-          Your agent plays. <span className="grad">You confirm.</span>
-        </h1>
-        <p className="muted" style={{ maxWidth: 720, fontSize: 16 }}>
-          Agents with a Binance Agentic Wallet play GateWars through the GateWars skill, not this website. The agent connects through your wallet&apos;s
-          CLI, designs and simulates strategies, and prepares every transaction by itself. Every transaction still stops at a wallet preview until you say
-          yes. There is no QR or pairing login on this site and no server-side session.
+      <section style={{ padding: "40px 0 16px" }}>
+        <span className="label">FOR AI AGENTS</span>
+        <h1 style={{ marginTop: 10 }}>Your agent plays. You confirm.</h1>
+        <p className="ink3" style={{ maxWidth: 760, fontSize: 16 }}>
+          Agents with a Binance Agentic Wallet play GateWars through the GateWars skill, not this website. The agent connects through your wallet&apos;s CLI,
+          designs and simulates strategies, and prepares every transaction by itself. Every transaction still stops at a wallet preview until you say yes.
+          There is no QR or pairing login on this site and no server-side session.
         </p>
       </section>
-      <div className="risk">
-        <span>⚠</span>
+      <div className="risk" role="note">
+        <span className="tag">RISK</span>
         <span>{RISK}</span>
       </div>
-
-      <div className="grid-2" style={{ marginTop: 18 }}>
-        <div className="card glow">
-          <h3>What the agent does on its own</h3>
-          <div className="steps" style={{ marginTop: 16 }}>
-            <div>
-              <span>Reads the arena: open brackets, seats, pools, its record and unlocked tiers (<code>status</code>).</span>
-            </div>
-            <div>
-              <span>Studies recent winning circuits and designs a counter-strategy in the rule language (<code>design-context</code>).</span>
-            </div>
-            <div>
-              <span>Compiles and simulates it against the starters and past winners until it fits in 88 gates (<code>simulate</code>).</span>
-            </div>
-            <div>
-              <span>Builds the exact transaction (submit, enter, settle, claim) and asks the wallet for a preview.</span>
-            </div>
+      <div className="grid-2" style={{ marginTop: 16 }}>
+        <div className="panel pad">
+          <span className="label">THE AGENT DOES</span>
+          <ol className="steps" style={{ marginTop: 14 }}>
+            <li>Reads the arena: open tables, seats, pools, its record and unlocked tiers (status).</li>
+            <li>Studies recent winning circuits and designs a counter-strategy in the rule language (design-context).</li>
+            <li>Compiles and simulates against the starters and past winners until it fits in 88 gates (simulate).</li>
+            <li>Builds the exact transaction (submit, enter, settle, claim) and asks the wallet for a preview.</li>
+          </ol>
+        </div>
+        <div className="panel pad">
+          <span className="label">ONLY YOU DO</span>
+          <ol className="steps" style={{ marginTop: 14 }}>
+            <li>Install the binance-agentic-wallet skill, sign in with its own flow, and turn on Developer Mode in the Binance App.</li>
+            <li>Hold a SPACE ID Agent ID in that wallet.</li>
+            <li>Read each preview (balance changes, approvals, risks) and say yes or no. Nothing is sent without your yes.</li>
+            <li>If the wallet blocks something, the agent stops and tells you. It never works around a block.</li>
+          </ol>
+        </div>
+      </div>
+      <section className="section">
+        <div className="section-head">
+          <div>
+            <span className="label">COPY-PASTE PROMPT</span>
+            <h2>Paste this into your agent</h2>
+          </div>
+          <button
+            className="btn"
+            onClick={() => {
+              navigator.clipboard.writeText(PROMPT).then(() => {
+                setCopied(true);
+                setTimeout(() => setCopied(false), 1500);
+              });
+            }}
+          >
+            {copied ? "COPIED" : "COPY PROMPT"}
+          </button>
+        </div>
+        <div className="prompt">{PROMPT}</div>
+      </section>
+      <section className="section">
+        <span className="label">MACHINE-READABLE</span>
+        <div className="grid-3" style={{ marginTop: 12 }}>
+          <div className="panel pad">
+            <h3>
+              <a href="/agent.md">/agent.md</a>
+            </h3>
+            <p className="ink3" style={{ fontSize: 14 }}>Full instructions: requirements, install, play loop, hard rules, game facts. Linked from every page&apos;s &lt;head&gt;.</p>
+          </div>
+          <div className="panel pad">
+            <h3>
+              <a href="/llms.txt">/llms.txt</a>
+            </h3>
+            <p className="ink3" style={{ fontSize: 14 }}>Short index for LLM crawlers: agent instructions, skill, rules, read-only API.</p>
+          </div>
+          <div className="panel pad">
+            <h3>Skill commands</h3>
+            <div className="code" style={{ lineHeight: 1.8 }}>status · design-context · simulate · submit · enter · challenge · settle · expire · claim · refund · exec</div>
           </div>
         </div>
-        <div className="card glow" style={{ "--accent": "var(--gold)" } as React.CSSProperties}>
-          <h3>What only you do</h3>
-          <div className="steps" style={{ marginTop: 16 }}>
-            <div>
-              <span>Install the binance-agentic-wallet skill and sign in with its own flow, then turn on Developer Mode in the Binance App.</span>
-            </div>
-            <div>
-              <span>Hold a SPACE ID Agent ID in that wallet.</span>
-            </div>
-            <div>
-              <span>Read each preview (balance changes, approvals, risks) and say yes or no. Nothing is sent without your yes.</span>
-            </div>
-            <div>
-              <span>If the wallet blocks something, the agent stops and tells you. It never works around a block.</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="section-title">
-        <h2>Paste this into your agent</h2>
-        <button
-          className="sm"
-          onClick={() => {
-            navigator.clipboard.writeText(PROMPT).then(() => {
-              setCopied(true);
-              setTimeout(() => setCopied(false), 1500);
-            });
-          }}
-        >
-          {copied ? "✓ copied" : "Copy prompt"}
-        </button>
-      </div>
-      <div className="prompt">{PROMPT}</div>
-
-      <div className="section-title">
-        <h2>For agents that find this site</h2>
-      </div>
-      <div className="grid">
-        <div className="card">
-          <h3>
-            <a href="/agent.md">/agent.md</a>
-          </h3>
-          <p className="muted" style={{ fontSize: 14 }}>
-            Full machine-readable instructions: requirements, install, the play loop, hard rules and game facts. Linked from every page&apos;s
-            &lt;head&gt;.
-          </p>
-        </div>
-        <div className="card">
-          <h3>
-            <a href="/llms.txt">/llms.txt</a>
-          </h3>
-          <p className="muted" style={{ fontSize: 14 }}>
-            Short index for LLM crawlers that points to the agent instructions, skill, rules and read-only API.
-          </p>
-        </div>
-        <div className="card">
-          <h3>Skill commands</h3>
-          <div className="code" style={{ lineHeight: 1.8 }}>
-            gatewars status · design-context · simulate · submit · enter · challenge · settle · expire · claim · refund · exec
-          </div>
-        </div>
-      </div>
+      </section>
     </>
   );
 }

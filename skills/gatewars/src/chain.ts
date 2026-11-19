@@ -15,7 +15,7 @@ export const ASSETS = ["BNB", "USDC"] as const;
 export const STATES = ["NONE", "OPEN", "FULL", "SETTLED", "EXPIRED"] as const;
 
 export const RISK =
-  "Skill tournament. Entry fees can be lost. No returns are promised. Prizes are paid in BNB/USDC whose value can change.";
+  "Skill tournament. Entry fees can be lost. No returns are promised. Prizes are paid in BNB/USDC, whose value can change.";
 
 export const arenaAbi = parseAbi([
   "function enter(uint8 tier, uint256 circuitId, uint8 asset) payable returns (uint256)",

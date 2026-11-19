@@ -2,7 +2,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { usePublicClient } from "wagmi";
 import { play } from "@gatewars/compiler";
-import { ADDR, arenaAbi, registryAbi, processorAbi, STATES, ZERO, type GameView } from "./contracts";
+import { ADDR, arenaAbi, feedAbi, registryAbi, processorAbi, STATES, ZERO, type GameView } from "./contracts";
 
 export const API = process.env.NEXT_PUBLIC_API_URL || "";
 
@@ -91,3 +91,66 @@ export function roundRobin(tables: bigint[]): { matches: MatchRow[]; totals: num
 
 export const isSettled = (g: GameView) => STATES[g.state] === "SETTLED";
 export const hasWinner = (g: GameView) => g.winner !== ZERO;
+
+// ---------------------------------------------------------------- Phase 2c additions
+
+export type Stats = { games: number; agents: number; livePoolsUsd: number; openTables: number; lastMatchTime: number | null };
+
+/** Status strip numbers: keeper API first (fast), chain fallback. Undefined while loading — never 0 as a loading state. */
+export function useStats() {
+  const pc = usePublicClient();
+  return useQuery({
+    queryKey: ["stats"],
+    enabled: !!pc,
+    refetchInterval: 20_000,
+    retry: 3,
+    queryFn: async (): Promise<Stats> => {
+      if (API) {
+        try {
+          const r = await fetch(`${API}/stats`, { signal: AbortSignal.timeout(6000) });
+          if (r.ok) {
+            const j = await r.json();
+            const [b, c] = await Promise.all([fetch(`${API}/brackets`).then((x) => x.json()).catch(() => null), fetch(`${API}/challenges`).then((x) => x.json()).catch(() => null)]);
+            const openTables = (b?.open?.ROOKIE ? 1 : 0) + (b?.open?.PRO ? 1 : 0) + (c?.open?.length ?? 0);
+            return { games: j.games, agents: j.agents, livePoolsUsd: j.livePoolsUsd, openTables, lastMatchTime: j.lastMatchTime };
+          }
+        } catch {
+          /* fall through to chain */
+        }
+      }
+      const next = await pc!.readContract({ address: ADDR.arena, abi: arenaAbi, functionName: "nextGameId" });
+      const games = (await Promise.all(
+        Array.from({ length: Number(next) - 1 }, (_, i) => pc!.readContract({ address: ADDR.arena, abi: arenaAbi, functionName: "game", args: [BigInt(i + 1)] })),
+      )) as GameView[];
+      const agents = new Set(games.flatMap((g) => g.players.map((p) => p.toLowerCase()))).size;
+      const live = games.filter((g) => g.state === 1 || g.state === 2);
+      return {
+        games: games.length,
+        agents,
+        livePoolsUsd: live.reduce((s, g) => s + Number(g.poolUsd) / 1e8, 0),
+        openTables: games.filter((g) => g.state === 1).length,
+        lastMatchTime: null,
+      };
+    },
+  });
+}
+
+export function useBnbUsd() {
+  const pc = usePublicClient();
+  return useQuery({
+    queryKey: ["bnbusd"],
+    enabled: !!pc,
+    refetchInterval: 30_000,
+    queryFn: async () => {
+      const r = await pc!.readContract({ address: ADDR.feed, abi: feedAbi, functionName: "latestRoundData" });
+      return Number(r[1]) / 1e8;
+    },
+  });
+}
+
+/** Match order inside a round robin: (0,1),(0,2),…,(1,2),… — the same order as MatchPlayed events. */
+export function matchPairs(n: number): [number, number][] {
+  const out: [number, number][] = [];
+  for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) out.push([i, j]);
+  return out;
+}
