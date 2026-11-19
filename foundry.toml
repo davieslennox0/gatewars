@@ -11,6 +11,7 @@ remappings = [
   "@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/",
   "forge-std/=lib/forge-std/src/",
 ]
+no_match_contract = "^Mock"
 fs_permissions = [{ access = "read-write", path = "./deployments" }]
 
 [invariant]

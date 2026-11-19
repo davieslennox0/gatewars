@@ -366,6 +366,8 @@ contract ArenaTest is ArenaBase {
 
         // y accepts paying USDC; TFT vs TFT = 60/60 -> split each asset
         (, uint256 qu) = arena.quoteEntry(Arena.Tier.CHAMPION);
+        uint256 xb = arena.claimableBnb(x);
+        uint256 yb = arena.claimableBnb(y);
         vm.startPrank(y);
         usdc.approve(address(arena), qu);
         arena.acceptChallenge(cid, TFT, Arena.PayAsset.USDC);
@@ -373,8 +375,8 @@ contract ArenaTest is ArenaBase {
         assertEq(arena.openChallenges().length, 0);
         uint256 pb = q * 8000 / 10000;
         uint256 pu = qu * 8000 / 10000;
-        assertEq(arena.claimableBnb(x), pb - pb / 2);
-        assertEq(arena.claimableBnb(y), pb / 2);
+        assertEq(arena.claimableBnb(x) - xb, pb - pb / 2);
+        assertEq(arena.claimableBnb(y) - yb, pb / 2);
         assertEq(arena.claimableUsdc(x), pu - pu / 2);
         assertEq(arena.claimableUsdc(y), pu / 2);
         assertEq(arena.game(cid).winner, address(0));
@@ -386,12 +388,13 @@ contract ArenaTest is ArenaBase {
         address y = agent();
         _forceChampions(x, y);
         (uint256 q,) = arena.quoteEntry(Arena.Tier.CHAMPION);
+        uint256 xb = arena.claimableBnb(x);
         vm.prank(x);
         uint256 cid = arena.createChallenge{value: q}(ALLD, Arena.PayAsset.BNB);
         vm.prank(y);
         arena.acceptChallenge{value: q}(cid, TFT, Arena.PayAsset.BNB); // ALLD 24 vs TFT 19
         assertEq(arena.game(cid).winner, x);
-        assertEq(arena.claimableBnb(x), 2 * (q * 8000 / 10000));
+        assertEq(arena.claimableBnb(x) - xb, 2 * (q * 8000 / 10000));
         assertEq(arena.record(x).championWins, 1);
     }
 
