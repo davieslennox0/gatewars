@@ -1,11 +1,12 @@
 "use client";
 import { useMemo, useState } from "react";
-import { useReadContract } from "wagmi";
+import { useRead } from "@/lib/client";
+import { useL } from "@/lib/i18n";
 import { compile, dslToTable, play, STARTERS as T, MAX_GATES, tableHex } from "@gatewars/compiler";
 import { ADDR, registryAbi } from "@/lib/contracts";
 import DuelScope from "@/components/DuelScope";
 import { ledIndex, TRIPLES } from "@/components/Chips";
-import { fmtBnb, RiskBanner, Skel, useAgent, useTx } from "@/components/ui";
+import { AgentCommand, fmtBnb, RiskBanner, Skel } from "@/components/ui";
 
 const PRESETS: Record<string, string> = {
   "FORGIVING MAJORITY": "cooperate if opp_last == C\ndefect if opp_defects_in_last3 >= 2\ndefault cooperate",
@@ -26,8 +27,7 @@ export default function Builder() {
   const [mode, setMode] = useState<"leds" | "rules">("leds");
   const [dsl, setDsl] = useState(PRESETS["FORGIVING MAJORITY"]);
   const [table, setTable] = useState<bigint>(() => dslToTable(PRESETS["FORGIVING MAJORITY"]));
-  const { address, hasAgentId } = useAgent();
-  const tx = useTx();
+  const L = useL();
 
   const res = useMemo(() => {
     try {
@@ -39,31 +39,33 @@ export default function Builder() {
   }, [mode, dsl, table]);
   const cur = res.ok ? res.c.table : table;
   const gates = res.ok ? res.c.gates : 0;
-  const { data: fee } = useReadContract({ address: ADDR.registry, abi: registryAbi, functionName: "tapeOutFee", args: [BigInt(gates)], query: { enabled: res.ok } });
+  const { data: fee } = useRead<bigint>({ address: ADDR.registry, abi: registryAbi, functionName: "tapeOutFee", args: [BigInt(gates)], enabled: res.ok });
   const sims = useMemo(() => (Object.entries(T) as [string, bigint][]).map(([n, t]) => ({ n, ...play(cur, t) })), [cur]);
 
   return (
     <>
       <section style={{ padding: "40px 0 8px" }}>
-        <span className="label">BUILDER · 6 INPUTS · 1 OUTPUT · ≤ {MAX_GATES} NAND</span>
-        <h1 style={{ marginTop: 10 }}>Design the chip.</h1>
+        <span className="label">{L(`电路设计 · 6 输入 · 1 输出 · ≤ ${MAX_GATES} 个与非门`, `BUILDER · 6 INPUTS · 1 OUTPUT · ≤ ${MAX_GATES} NAND`)}</span>
+        <h1 style={{ marginTop: 10 }}>{L("设计你的芯片。", "Design the chip.")}</h1>
         <p className="ink3" style={{ maxWidth: 760, fontSize: 16 }}>
-          Each LED is one history: your last 3 moves (columns) and the opponent&apos;s last 3 (rows), newest first. Lit = cooperate. Round 1 reads as CCC/CCC.
-          The compiler minimises it to NAND gates; the registry tapes it out on TapeOut and caches all 64 answers.
+          {L(
+            "每颗灯代表一种历史：列 = 你最近 3 步，行 = 对手最近 3 步（最新在前）。亮蓝 = 合作。第 1 回合视为 CCC/CCC。编译器把它最小化为与非门；注册合约在 TapeOut 上流片并缓存全部 64 个答案。",
+            "Each LED is one history: your last 3 moves (columns) and the opponent's last 3 (rows), newest first. Blue = cooperate. Round 1 reads as CCC/CCC. The compiler minimises it to NAND gates; the registry tapes it out on TapeOut and caches all 64 answers.",
+          )}
         </p>
       </section>
 
       <div className="row" style={{ margin: "12px 0 16px" }}>
-        <div className="seg" role="group" aria-label="Editor">
+        <div className="seg" role="group" aria-label={L("编辑器", "Editor")}>
           <button aria-pressed={mode === "leds"} onClick={() => { if (res.ok) setTable(res.c.table); setMode("leds"); }}>
-            LED TABLE
+            {L("灯阵真值表", "LED TABLE")}
           </button>
           <button aria-pressed={mode === "rules"} onClick={() => setMode("rules")}>
-            RULES
+            {L("规则", "RULES")}
           </button>
         </div>
         <label className="row gap-8">
-          <span className="label">PRESET</span>
+          <span className="label">{L("预设", "PRESET")}</span>
           <select
             defaultValue=""
             onChange={(e) => {
@@ -73,7 +75,7 @@ export default function Builder() {
             }}
           >
             <option value="" disabled>
-              LOAD…
+              {L("载入…", "LOAD…")}
             </option>
             {Object.keys(PRESETS).map((k) => (
               <option key={k}>{k}</option>
@@ -87,8 +89,8 @@ export default function Builder() {
           {mode === "leds" ? (
             <>
               <div className="row between" style={{ marginBottom: 12 }}>
-                <span className="label">TRUTH TABLE · 8×8</span>
-                <span className="label">ROWS = OPP LAST 3 · COLS = ME LAST 3</span>
+                <span className="label">{L("真值表 · 8×8", "TRUTH TABLE · 8×8")}</span>
+                <span className="label">{L("行 = 对手最近3步 · 列 = 我最近3步", "ROWS = OPP LAST 3 · COLS = ME LAST 3")}</span>
               </div>
               <div className="ledgrid">
                 <span />
@@ -105,9 +107,9 @@ export default function Builder() {
           ) : (
             <>
               <div className="row between" style={{ marginBottom: 12 }}>
-                <span className="label">RULES · FIRST MATCH WINS</span>
+                <span className="label">{L("规则 · 首条匹配生效", "RULES · FIRST MATCH WINS")}</span>
               </div>
-              <textarea aria-label="Strategy rules" value={dsl} onChange={(e) => setDsl(e.target.value)} spellCheck={false} />
+              <textarea aria-label={L("策略规则", "Strategy rules")} value={dsl} onChange={(e) => setDsl(e.target.value)} spellCheck={false} />
               <div className="code" style={{ marginTop: 12, lineHeight: 1.7 }}>
                 MOVES my_last my_last2 my_last3 opp_last opp_last2 opp_last3 = C|D
                 <br />
@@ -129,16 +131,16 @@ export default function Builder() {
               <>
                 <div className="row between">
                   <span className="mono" style={{ fontSize: 22, fontWeight: 700 }}>
-                    GATES {res.c.gates}/{MAX_GATES}
+                    {L("门数", "GATES")} {res.c.gates}/{MAX_GATES}
                   </span>
-                  <span className="label">{res.c.fitsRegistry ? "FITS" : "TOO BIG"}</span>
+                  <span className="label">{res.c.fitsRegistry ? L("可上链", "FITS") : L("过大", "TOO BIG")}</span>
                 </div>
-                <div className="meter" role="meter" aria-valuemin={0} aria-valuemax={MAX_GATES} aria-valuenow={res.c.gates} aria-label="gate count">
+                <div className="meter" role="meter" aria-valuemin={0} aria-valuemax={MAX_GATES} aria-valuenow={res.c.gates} aria-label={L("门数", "gate count")}>
                   <i style={{ width: `${Math.min(100, (res.c.gates / MAX_GATES) * 100)}%` }} />
                 </div>
                 <div className="row between mono" style={{ fontSize: 12 }}>
-                  <span>COOPERATE CELLS {popcount(cur)}/64</span>
-                  <span className="muted">TABLE {tableHex(cur)}</span>
+                  <span>{L("合作格", "COOPERATE CELLS")} {popcount(cur)}/64</span>
+                  <span className="muted">{L("表", "TABLE")} {tableHex(cur)}</span>
                 </div>
                 <div className="code" style={{ maxHeight: 64, overflow: "auto" }}>
                   {res.c.netlist}
@@ -146,9 +148,9 @@ export default function Builder() {
               </>
             )}
           </div>
-          <span className="label">LIVE SIM · 20 ROUNDS VS STARTERS</span>
+          <span className="label">{L("实时模拟 · 20 回合 · 对阵入门电路", "LIVE SIM · 20 ROUNDS VS STARTERS")}</span>
           {sims.map((s) => (
-            <DuelScope key={s.n} nameA="YOUR CHIP" nameB={s.n} movesA={s.movesA} movesB={s.movesB} mode="static" compact title={`YOU ${s.scoreA} – ${s.scoreB} ${s.n}`} />
+            <DuelScope key={s.n} nameA={L("你的芯片", "YOUR CHIP")} nameB={s.n} movesA={s.movesA} movesB={s.movesB} mode="static" compact title={`${L("你", "YOU")} ${s.scoreA} – ${s.scoreB} ${s.n}`} />
           ))}
         </div>
       </div>
@@ -156,27 +158,24 @@ export default function Builder() {
       <section className="section panel pad col gap-16">
         <div className="row between">
           <div>
-            <span className="label">TAPE-OUT</span>
-            <h2>Submit to the registry</h2>
+            <span className="label">{L("流片", "TAPE-OUT")}</span>
+            <h2>{L("提交到注册合约", "Submit to the registry")}</h2>
           </div>
-          <span className="mono">EXACT FEE {fee !== undefined ? fmtBnb(fee, 4) : <Skel />}</span>
+          <span className="mono">
+            {L("精确费用", "EXACT FEE")} {fee !== undefined ? fmtBnb(fee, 4) : <Skel />}
+          </span>
         </div>
         <RiskBanner />
-        {!address ? (
-          <p className="ink3">Connect a wallet to tape out. Agentic Wallet users: `gatewars submit &quot;&lt;rules&gt;&quot;` through the skill.</p>
-        ) : hasAgentId === false ? (
-          <p className="c-defect">This wallet has no SPACE ID Agent ID — every GateWars action requires one.</p>
+        {res.ok && res.c.fitsRegistry ? (
+          <AgentCommand
+            cmd={`gatewars submit ${tableHex(cur)}`}
+            note={L(
+              "智能体用你的 Agent ID 钱包提交该真值表（编译结果与此处一致），先预览、经你确认后才发送。",
+              "Your agent submits this table from your Agent ID wallet (it compiles to the same netlist), previewing first and sending only after you confirm.",
+            )}
+          />
         ) : (
-          <div>
-            <button
-              className="btn lg"
-              disabled={!res.ok || !res.c.fitsRegistry || fee === undefined || tx.busy}
-              onClick={() => res.ok && tx.send({ address: ADDR.registry, abi: registryAbi, functionName: "submitCircuit", args: [res.c.netlist], value: fee! }).catch(() => {})}
-            >
-              TAPE OUT · {fee !== undefined ? fmtBnb(fee, 4) : ""}
-            </button>
-            {tx.status}
-          </div>
+          <p className="c-defect">{L("电路超过 88 个门，无法提交。", "Over 88 gates, cannot be submitted.")}</p>
         )}
       </section>
     </>

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { TIERS } from "@/lib/contracts";
 import { loadMatch } from "@/lib/server";
 import DuelScope, { MoveLog } from "@/components/DuelScope";
+import { T } from "@/lib/i18n";
 
 export const revalidate = 60;
 
@@ -16,12 +17,12 @@ export async function generateMetadata({ params }: P): Promise<Metadata> {
 
 export default async function MatchShare({ params }: P) {
   const m = await loadMatch(Number(params.game), Number(params.match)).catch(() => null);
-  if (!m) return <p style={{ marginTop: 40 }}>Match not found.</p>;
+  if (!m) return <p style={{ marginTop: 40 }}><T zh="未找到该对局。" en="Match not found." /></p>;
   const url = `https://gatewars.vercel.app/m/${params.game}/${params.match}`;
   return (
     <section style={{ padding: "32px 0" }}>
       <span className="label">
-        TABLE #{params.game} · {TIERS[m.g.tier]} · MATCH {String(Number(params.match) + 1).padStart(2, "0")}/{m.total} {m.played ? "" : "· PREVIEW (NOT PLAYED YET)"}
+        <T zh="牌桌" en="TABLE" /> #{params.game} · {TIERS[m.g.tier]} · <T zh="对局" en="MATCH" /> {String(Number(params.match) + 1).padStart(2, "0")}/{m.total} {m.played ? "" : <T zh="· 预览（尚未开赛）" en="· PREVIEW (NOT PLAYED YET)" />}
       </span>
       <h1 style={{ marginTop: 8, fontSize: "clamp(28px, 5vw, 44px)" }}>
         {m.a} {m.scoreA}–{m.scoreB} {m.b}
@@ -34,10 +35,10 @@ export default async function MatchShare({ params }: P) {
       </div>
       <div className="row" style={{ marginTop: 20 }}>
         <Link href={`/arena/${params.game}`} className="btn outline">
-          FULL TABLE →
+          <T zh="查看整桌 →" en="FULL TABLE →" />
         </Link>
         <Link href="/builder" className="btn">
-          BUILD A COUNTER-CIRCUIT
+          <T zh="设计反制电路" en="BUILD A COUNTER-CIRCUIT" />
         </Link>
       </div>
     </section>

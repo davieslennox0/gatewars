@@ -2,20 +2,20 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { useAccount, useConnect, useDisconnect, useReadContract, useSwitchChain } from "wagmi";
-import { bsc } from "wagmi/chains";
-import { ADDR, arenaAbi, bscscan, RISK } from "@/lib/contracts";
-import { useAgent } from "./ui";
+import { ADDR, bscscan } from "@/lib/contracts";
+import { LangToggle, RISK_ZH, useL, useLang } from "@/lib/i18n";
+import { RISK } from "@/lib/contracts";
 
-export const NAV = [
-  ["/", "LOBBY"],
-  ["/builder", "BUILDER"],
-  ["/challenges", "CHAMPION"],
-  ["/circuits", "HALL OF CIRCUITS"],
-  ["/leaderboard", "LEADERBOARD"],
-  ["/agents", "FOR AGENTS"],
-  ["/rules", "RULES"],
-] as const;
+export const NAV: [string, string, string][] = [
+  ["/", "大厅", "LOBBY"],
+  ["/builder", "电路设计", "BUILDER"],
+  ["/challenges", "冠军赛", "CHAMPION"],
+  ["/circuits", "电路名人堂", "HALL OF CIRCUITS"],
+  ["/leaderboard", "排行榜", "LEADERBOARD"],
+  ["/me", "智能体档案", "AGENT PROFILE"],
+  ["/agents", "智能体接入", "FOR AGENTS"],
+  ["/rules", "规则", "RULES"],
+];
 
 export function Logo() {
   return (
@@ -35,33 +35,29 @@ const isActive = (path: string, href: string) => (href === "/" ? path === "/" : 
 
 export default function Header() {
   const path = usePathname();
+  const L = useL();
   const [open, setOpen] = useState(false);
   const burger = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => setOpen(false), [path]); // close on route change
+  useEffect(() => setOpen(false), [path]);
   return (
     <header className="top">
       <div className="wrap inner">
-        <Link href="/" className="logo" aria-label="GateWars lobby">
+        <Link href="/" className="logo" aria-label="GateWars">
           <Logo /> GATEWARS
         </Link>
-        <nav className="desk" aria-label="Main">
-          {NAV.map(([href, label]) => (
+        <nav className="desk" aria-label={L("主导航", "Main")}>
+          {NAV.map(([href, zh, en]) => (
             <Link key={href} href={href} aria-current={isActive(path, href) ? "page" : undefined}>
-              {label}
+              {L(zh, en)}
             </Link>
           ))}
         </nav>
         <div className="header-right">
-          <IdPill />
-          <button
-            ref={burger}
-            className="btn outline icon hamburger"
-            aria-label="Open menu"
-            aria-expanded={open}
-            aria-controls="mobile-menu"
-            onClick={() => setOpen(true)}
-          >
+          <Link href="/agents" className="btn desk-only" style={{ minHeight: 36 }}>
+            {L("让智能体参赛", "PLAY WITH YOUR AGENT")}
+          </Link>
+          <LangToggle />
+          <button ref={burger} className="btn outline icon hamburger" aria-label={L("打开菜单", "Open menu")} aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen(true)}>
             <svg width="18" height="14" viewBox="0 0 18 14" aria-hidden>
               <path d="M0 1h18M0 7h18M0 13h18" stroke="var(--ink)" strokeWidth="2" />
             </svg>
@@ -73,42 +69,11 @@ export default function Header() {
   );
 }
 
-function IdPill() {
-  const { isConnected, chainId } = useAccount();
-  const { connectors, connect, isPending } = useConnect();
-  const { address, handle } = useAgent();
-  const { switchChain } = useSwitchChain();
-  if (!isConnected) {
-    const c = connectors[0];
-    return (
-      <button className="btn" style={{ minHeight: 36 }} disabled={isPending || !c} onClick={() => c && connect({ connector: c, chainId: bsc.id })}>
-        CONNECT
-      </button>
-    );
-  }
-  if (chainId !== bsc.id)
-    return (
-      <button className="btn outline" style={{ minHeight: 36 }} onClick={() => switchChain({ chainId: bsc.id })}>
-        SWITCH TO BSC
-      </button>
-    );
-  return (
-    <Link href="/me" className="id-pill" aria-label="Your Agent ID profile">
-      <span className="dot" />
-      {handle ? `${handle}.ai` : `${address!.slice(0, 6)}…${address!.slice(-4)}`}
-    </Link>
-  );
-}
-
 function MobileMenu({ open, onClose, returnFocus, path }: { open: boolean; onClose: () => void; returnFocus: React.RefObject<HTMLButtonElement>; path: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(open);
-  const { isConnected } = useAccount();
-  const { connectors, connect } = useConnect();
-  const { disconnect } = useDisconnect();
-  const { address, handle } = useAgent();
-  const { data: rec } = useReadContract({ address: ADDR.arena, abi: arenaAbi, functionName: "record", args: address ? [address] : undefined, query: { enabled: !!address } });
-
+  const L = useL();
+  const { lang } = useLang();
   useEffect(() => {
     if (open) setMounted(true);
   }, [open]);
@@ -125,14 +90,12 @@ function MobileMenu({ open, onClose, returnFocus, path }: { open: boolean; onClo
       } else if (e.key === "Tab") {
         const f = focusables();
         if (!f.length) return;
-        const first = f[0];
-        const last = f[f.length - 1];
-        if (e.shiftKey && document.activeElement === first) {
+        if (e.shiftKey && document.activeElement === f[0]) {
           e.preventDefault();
-          last.focus();
-        } else if (!e.shiftKey && document.activeElement === last) {
+          f[f.length - 1].focus();
+        } else if (!e.shiftKey && document.activeElement === f[f.length - 1]) {
           e.preventDefault();
-          first.focus();
+          f[0].focus();
         }
       }
     };
@@ -143,9 +106,7 @@ function MobileMenu({ open, onClose, returnFocus, path }: { open: boolean; onClo
       returnFocus.current?.focus();
     };
   }, [open, onClose, returnFocus]);
-
   if (!mounted) return null;
-  const tier = rec ? (rec.proWins >= 3 ? "CHAMPION" : rec.rookieWins >= 1 ? "PRO" : "ROOKIE") : "";
   return (
     <>
       {open && <div className="backdrop" onClick={onClose} aria-hidden />}
@@ -155,56 +116,40 @@ function MobileMenu({ open, onClose, returnFocus, path }: { open: boolean; onClo
         className={`sheet-right ${open ? "open" : ""}`}
         role="dialog"
         aria-modal="true"
-        aria-label="Menu"
+        aria-label={L("菜单", "Menu")}
         aria-hidden={!open}
         onTransitionEnd={() => !open && setMounted(false)}
         style={{ visibility: open ? "visible" : "hidden" }}
       >
         <div className="row between" style={{ padding: "6px 8px 6px 20px", borderBottom: "1px solid var(--line)" }}>
-          <span className="label">MENU</span>
-          <button className="btn ghost icon" aria-label="Close menu" onClick={onClose}>
+          <span className="label">{L("菜单", "MENU")}</span>
+          <button className="btn ghost icon" aria-label={L("关闭菜单", "Close menu")} onClick={onClose}>
             <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden>
               <path d="M2 2l12 12M14 2L2 14" stroke="var(--ink)" strokeWidth="2" />
             </svg>
           </button>
         </div>
-        <div style={{ padding: 20, borderBottom: "1px solid var(--line)" }}>
-          {isConnected && address ? (
-            <div className="col gap-4">
-              <span className="label sm">AGENT ID</span>
-              <span className="mono" style={{ fontSize: 18, fontWeight: 700 }}>
-                {handle ? `${handle}.ai` : `${address.slice(0, 6)}…${address.slice(-4)}`}
-              </span>
-              <span className="mono ink3" style={{ fontSize: 12 }}>
-                {rec ? `W ${rec.wins} · L ${rec.losses} · TIER ${tier}` : "…"}
-              </span>
-              <div className="row" style={{ marginTop: 8 }}>
-                <Link href="/me" className="btn outline" style={{ flex: 1 }}>
-                  PROFILE
-                </Link>
-                <button className="btn ghost" onClick={() => disconnect()}>
-                  DISCONNECT
-                </button>
-              </div>
-            </div>
-          ) : (
-            <button className="btn block" onClick={() => connectors[0] && connect({ connector: connectors[0], chainId: bsc.id })}>
-              CONNECT WALLET
-            </button>
-          )}
+        <div style={{ padding: 20, borderBottom: "1px solid var(--line)" }} className="col gap-8">
+          <span className="label sm">{L("由智能体参赛", "PLAYED BY AGENTS")}</span>
+          <span className="ink3" style={{ fontSize: 13 }}>
+            {L("本站无需连接钱包。你的币安智能体用 Agent ID 钱包参赛，每笔交易都由你确认。", "No wallet connection on this site. Your Binance agent plays with its Agent ID wallet; you confirm every transaction.")}
+          </span>
+          <Link href="/agents" className="btn block" onClick={onClose}>
+            {L("让智能体参赛", "PLAY WITH YOUR AGENT")}
+          </Link>
         </div>
-        <nav aria-label="Mobile">
-          {NAV.map(([href, label]) => (
+        <nav aria-label={L("移动导航", "Mobile")}>
+          {NAV.map(([href, zh, en]) => (
             <Link key={href} href={href} aria-current={isActive(path, href) ? "page" : undefined} onClick={onClose}>
-              {label}
+              {L(zh, en)}
             </Link>
           ))}
         </nav>
         <div style={{ marginTop: "auto", padding: 20, borderTop: "1px solid var(--line)" }} className="col gap-8">
           <a href={bscscan(ADDR.arena)} target="_blank" rel="noreferrer" className="mono" style={{ fontSize: 12 }}>
-            CONTRACTS ON BSCSCAN ↗
+            {L("BSCSCAN 合约 ↗", "CONTRACTS ON BSCSCAN ↗")}
           </a>
-          <span style={{ fontSize: 12, color: "var(--risk-text)" }}>{RISK}</span>
+          <span style={{ fontSize: 12, color: "var(--risk-text)" }}>{lang === "zh" ? RISK_ZH : RISK}</span>
         </div>
       </div>
     </>

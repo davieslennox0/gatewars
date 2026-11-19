@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { STARTER_NAMES, displayName, type GameView } from "@/lib/contracts";
 import { fmtBnb, fmtUsd8, fmtUsdc, TIER_PART } from "./ui";
+import { useL } from "@/lib/i18n";
 
 type Seat = { label: string; sub?: string; href?: string } | null;
 
@@ -15,16 +16,17 @@ function seatsOf(g: GameView | undefined, size: number): Seat[] {
 }
 
 function Pin({ seat, side, onTake }: { seat: Seat; side: "left" | "right"; onTake?: () => void }) {
+  const L = useL();
   const label = seat ? (
     <span className="pinlabel" title={`${seat.label} ${seat.sub ?? ""}`}>
       {seat.label}
     </span>
   ) : onTake ? (
     <button className="pinlabel open" onClick={onTake} style={{ border: 0, background: "none", cursor: "pointer", font: "inherit", padding: 0, textAlign: side === "left" ? "right" : "left" }}>
-      + TAKE SEAT
+      {L("+ 入座", "+ TAKE SEAT")}
     </button>
   ) : (
-    <span className="pinlabel open">open</span>
+    <span className="pinlabel open">{L("空位", "open")}</span>
   );
   return (
     <div className="pinrow">
@@ -45,6 +47,7 @@ function Pin({ seat, side, onTake }: { seat: Seat; side: "left" | "right"; onTak
 
 /** Rookie = DIP-8 (4+4 pins), Pro = DIP-4 (2+2), Champion = 2-terminal. Each pin is a seat. */
 export function ChipSeat({ tier, game, onTake, locked }: { tier: number; game?: GameView; onTake?: () => void; locked?: boolean }) {
+  const L = useL();
   const size = tier === 0 ? 8 : tier === 1 ? 4 : 2;
   const seats = seatsOf(game, size);
   const half = size / 2;
@@ -59,7 +62,7 @@ export function ChipSeat({ tier, game, onTake, locked }: { tier: number; game?: 
         </div>
         <div className="chipbody c2">
           <span className="pn">{TIER_PART[2]}</span>
-          <span className="sub">{game ? `${filled}/2 · TABLE #${game.id}` : "1V1 · OPEN"}</span>
+          <span className="sub">{game ? L(`${filled}/2 · 第 ${game.id} 桌`, `${filled}/2 · TABLE #${game.id}`) : L("1V1 · 开放", "1V1 · OPEN")}</span>
         </div>
         <div className="pins right" style={{ height: 72 }}>
           <Pin seat={seats[1]} side="right" onTake={game ? onTake : undefined} />
@@ -85,7 +88,7 @@ export function ChipSeat({ tier, game, onTake, locked }: { tier: number; game?: 
         <span className="sub">
           {filled}/{size}
         </span>
-        <span className="sub">{game ? `TABLE #${game.id}` : "NO TABLE"}</span>
+        <span className="sub">{game ? L(`第 ${game.id} 桌`, `TABLE #${game.id}`) : L("暂无牌桌", "NO TABLE")}</span>
       </div>
       <div className="pins right" style={tier === 1 ? { height: 96 } : undefined}>
         {right.map((s, i) => (
@@ -97,10 +100,11 @@ export function ChipSeat({ tier, game, onTake, locked }: { tier: number; game?: 
 }
 
 export function PoolValue({ g, fallbackUsd }: { g?: GameView; fallbackUsd?: string }) {
+  const L = useL();
   return (
     <div>
       <div className="mono" style={{ fontSize: 13, fontWeight: 600 }}>
-        POOL ≈ {g ? fmtUsd8(g.poolUsd) : fallbackUsd ?? "$0.00"}
+        {L("奖池", "POOL")} ≈ {g ? fmtUsd8(g.poolUsd) : fallbackUsd ?? "$0.00"}
       </div>
       {g && (
         <div className="label sm" style={{ textTransform: "none", letterSpacing: "0.04em" }}>
@@ -113,6 +117,7 @@ export function PoolValue({ g, fallbackUsd }: { g?: GameView; fallbackUsd?: stri
 
 /** 8×8 LED view of a 64-entry table (rows = opponent last 3, cols = my last 3, newest first, CCC..DDD). */
 export function LedTable({ table, size = 12 }: { table: bigint; size?: number }) {
+  const L = useL();
   const cells: JSX.Element[] = [];
   for (let row = 0; row < 8; row++)
     for (let col = 0; col < 8; col++) {
@@ -120,7 +125,7 @@ export function LedTable({ table, size = 12 }: { table: bigint; size?: number })
       cells.push(<span key={k} className={`led ${(table >> BigInt(k)) & 1n ? "on" : ""}`} style={{ width: size, height: size }} />);
     }
   return (
-    <div className="leds" role="img" style={{ gridTemplateColumns: `repeat(8, ${size}px)` }} aria-label="strategy truth table">
+    <div className="leds" role="img" style={{ gridTemplateColumns: `repeat(8, ${size}px)` }} aria-label={L("策略真值表", "strategy truth table")}>
       {cells}
     </div>
   );
@@ -136,11 +141,12 @@ export function ledIndex(col: number, row: number) {
 }
 
 export function CircuitCard({ id, gates, name, table, note, href }: { id: number; gates?: number; name: string; table: bigint; note: string; href?: string }) {
+  const L = useL();
   return (
     <div className="panel pad col gap-8">
       <div className="row between">
-        <span className="label">CIRCUIT #{id}</span>
-        {gates !== undefined && <span className="label">{gates} GATES</span>}
+        <span className="label">{L("电路", "CIRCUIT")} #{id}</span>
+        {gates !== undefined && <span className="label">{L(`${gates} 个门`, `${gates} GATES`)}</span>}
       </div>
       <div className="mono" style={{ fontWeight: 700, fontSize: 15 }}>
         {href ? <Link href={href}>{name}</Link> : name}

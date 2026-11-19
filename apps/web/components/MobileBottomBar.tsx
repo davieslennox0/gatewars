@@ -4,9 +4,11 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useQuotes } from "@/lib/data";
 import EntrySheet from "./EntrySheet";
+import { useL } from "@/lib/i18n";
 
 /** Mobile only (< 960px): builder shortcut + primary "ENTER ROOKIE · $1" opening the entry sheet. */
 export default function MobileBottomBar() {
+  const L = useL();
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false); // client-only: avoids a layout shift during hydration/font swap
   useEffect(() => setMounted(true), []);
@@ -17,14 +19,14 @@ export default function MobileBottomBar() {
   return (
     <>
       <div className="bottombar mob-only">
-        <Link href="/builder" className="btn outline icon" aria-label="Open the circuit builder">
+        <Link href="/builder" className="btn outline icon" aria-label={L("打开电路设计", "Open the circuit builder")}>
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden>
             <rect x="4" y="4" width="12" height="12" rx="1" stroke="var(--ink)" strokeWidth="1.5" />
             <path d="M7 1v3M10 1v3M13 1v3M7 16v3M10 16v3M13 16v3M1 7h3M1 10h3M1 13h3M16 7h3M16 10h3M16 13h3" stroke="var(--pin)" strokeWidth="1.5" />
           </svg>
         </Link>
         <button className="btn primary" onClick={() => setOpen(true)}>
-          ENTER ROOKIE · {usd}
+          {L(`报名新手赛 · ${usd}`, `ENTER ROOKIE · ${usd}`)}
         </button>
       </div>
       <EntrySheet open={open} onClose={() => setOpen(false)} tier={0} />

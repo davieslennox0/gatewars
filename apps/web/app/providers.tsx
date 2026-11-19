@@ -1,14 +1,13 @@
 "use client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { WagmiProvider } from "wagmi";
 import { useState } from "react";
-import { config } from "@/lib/wagmi";
+import { LangProvider } from "@/lib/i18n";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
-  const [qc] = useState(() => new QueryClient());
+  const [qc] = useState(() => new QueryClient({ defaultOptions: { queries: { staleTime: 10_000, retry: 2 } } }));
   return (
-    <WagmiProvider config={config}>
-      <QueryClientProvider client={qc}>{children}</QueryClientProvider>
-    </WagmiProvider>
+    <QueryClientProvider client={qc}>
+      <LangProvider>{children}</LangProvider>
+    </QueryClientProvider>
   );
 }

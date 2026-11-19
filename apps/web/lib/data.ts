@@ -1,6 +1,6 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
-import { usePublicClient } from "wagmi";
+import { usePC as usePublicClient } from "./client";
 import { play } from "@gatewars/compiler";
 import { ADDR, arenaAbi, feedAbi, registryAbi, processorAbi, STATES, ZERO, type GameView } from "./contracts";
 

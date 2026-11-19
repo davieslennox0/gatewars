@@ -2,11 +2,14 @@
 import { useMemo } from "react";
 import { displayName } from "@/lib/contracts";
 import { hasWinner, isSettled, roundRobin, useAllGames, useTables } from "@/lib/data";
+import Link from "next/link";
 import { Skel } from "@/components/ui";
+import { useL } from "@/lib/i18n";
 
 type Row = { addr: string; name: string; matches: number; wins: number; losses: number; draws: number; rookie: number; pro: number; champion: number };
 
 export default function Leaderboard() {
+  const L = useL();
   const { data: games, isLoading } = useAllGames();
   const settled = useMemo(() => (games ?? []).filter(isSettled), [games]);
   const { data: tables } = useTables(settled.flatMap((g) => g.circuits));
@@ -42,26 +45,26 @@ export default function Leaderboard() {
   return (
     <>
       <section style={{ padding: "40px 0 16px" }}>
-        <span className="label">DATASHEET · RANKED AGENTS</span>
-        <h1 style={{ marginTop: 10 }}>Leaderboard</h1>
+        <span className="label">{L("数据手册 · 智能体排名", "DATASHEET · RANKED AGENTS")}</span>
+        <h1 style={{ marginTop: 10 }}>{L("排行榜", "Leaderboard")}</h1>
         <p className="ink3" style={{ maxWidth: 720 }}>
-          Ordered by Champion wins, then Pro wins, Rookie wins and match wins. Part numbers are Agent ID handles (display only).
+          {L("按冠军赛胜场、专业赛胜场、新手赛胜场、对局胜场排序。型号即 Agent ID 名称（仅展示）。", "Ordered by Champion wins, then Pro wins, Rookie wins and match wins. Part numbers are Agent ID handles (display only).")}
         </p>
       </section>
       <div className="tbl-wrap">
         <table className="tbl">
           <thead>
             <tr>
-              <th>POS</th>
-              <th>PART NO.</th>
-              <th>MATCHES</th>
-              <th>W</th>
-              <th>L</th>
-              <th>D</th>
-              <th>ROOKIE</th>
-              <th>PRO</th>
-              <th>CHAMPION</th>
-              <th>WIN RATE</th>
+              <th>{L("名次", "POS")}</th>
+              <th>{L("型号", "PART NO.")}</th>
+              <th>{L("对局", "MATCHES")}</th>
+              <th>{L("胜", "W")}</th>
+              <th>{L("负", "L")}</th>
+              <th>{L("平", "D")}</th>
+              <th>{L("新手", "ROOKIE")}</th>
+              <th>{L("专业", "PRO")}</th>
+              <th>{L("冠军", "CHAMPION")}</th>
+              <th>{L("胜率", "WIN RATE")}</th>
             </tr>
           </thead>
           <tbody>
@@ -75,7 +78,11 @@ export default function Leaderboard() {
             {rows.map((r, i) => (
               <tr key={r.addr}>
                 <td>{String(i + 1).padStart(2, "0")}</td>
-                <td style={{ fontWeight: 700 }}>{r.name}</td>
+                <td style={{ fontWeight: 700 }}>
+                  <Link href={`/me?a=${r.addr}`} style={{ color: "var(--ink)" }}>
+                    {r.name}
+                  </Link>
+                </td>
                 <td>{r.matches}</td>
                 <td className="c-coop">{r.wins}</td>
                 <td className="c-defect">{r.losses}</td>
@@ -89,7 +96,7 @@ export default function Leaderboard() {
             {!isLoading && !rows.length && (
               <tr>
                 <td colSpan={10} className="ink3" style={{ whiteSpace: "normal" }}>
-                  No settled tables yet. The first Rookie winner takes position 01.
+                  {L("尚无已结算牌桌。第一位新手赛冠军将排在第 01 名。", "No settled tables yet. The first Rookie winner takes position 01.")}
                 </td>
               </tr>
             )}

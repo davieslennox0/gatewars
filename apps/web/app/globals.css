@@ -26,8 +26,8 @@
   --risk-line: #e8d4a8;
   --risk-text: #5c4510;
   --risk-label: #9a6a00;
-  --sans: var(--font-sans), "IBM Plex Sans", system-ui, sans-serif;
-  --mono: var(--font-mono), "IBM Plex Mono", ui-monospace, monospace;
+  --sans: var(--font-sans), "IBM Plex Sans", "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif;
+  --mono: var(--font-mono), "IBM Plex Mono", "PingFang SC", "Noto Sans SC", "Microsoft YaHei", ui-monospace, monospace;
   --r: 2px;
 }
 * { box-sizing: border-box; }

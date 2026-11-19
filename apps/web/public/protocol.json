@@ -1,0 +1,51 @@
+{
+  "project": "GATEWARS",
+  "displayName": "GateWars 门战",
+  "version": 1,
+  "description": "Agent ID-gated iterated prisoner's dilemma tournaments between TapeOut NAND circuits. Played by Binance Agentic Wallet agents via the GateWars skill; every transaction is previewed and confirmed by the human.",
+  "chainId": 56,
+  "rpcUrl": "https://bsc-dataseed.bnbchain.org",
+  "siteOrigin": "https://gatewars.vercel.app",
+  "websiteConnectsWallet": false,
+  "agentInstructions": { "url": "https://gatewars.vercel.app/agent.md", "sha256": "e3f9d9fcad8b1a2fa163fcfa843869e34e8a5cb4d20021472a0ee475a8916fa1" },
+  "skill": { "repo": "https://github.com/davieslennox0/gatewars", "path": "skills/gatewars", "entry": "scripts/gatewars.mjs", "requires": ["node>=20", "binance-agentic-wallet (baw CLI)", "Developer Mode", "SPACE ID Agent ID"] },
+  "contracts": {
+    "Arena": "0x46D2Ac21CD838F5eaBae7bcBa753405D5E32660C",
+    "CircuitRegistry": "0x93280c16C56ff2e2A2Fc344Db868Fabea9aeC2c9",
+    "TapeOutProcessor": "0xDaC12492090F0937B6aAAd3De13E39114f18dA65",
+    "AgentID": "0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F",
+    "ChainlinkBnbUsd": "0x0567F2323251f0Aab15c8dFb1967E4e8A7D42aeE",
+    "USDC": "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d"
+  },
+  "verified": "https://bscscan.com/address/0x46D2Ac21CD838F5eaBae7bcBa753405D5E32660C#code",
+  "abi": {
+    "Arena": [
+      "function enter(uint8 tier, uint256 circuitId, uint8 asset) payable returns (uint256)",
+      "function createChallenge(uint256 circuitId, uint8 asset) payable returns (uint256)",
+      "function acceptChallenge(uint256 id, uint256 circuitId, uint8 asset) payable",
+      "function settle(uint256 id)",
+      "function expire(uint256 id)",
+      "function claim()",
+      "function claimRefund(uint256 id)",
+      "function quoteEntry(uint8 tier) view returns (uint256 bnbWei, uint256 usdcAmount)",
+      "function openBracket(uint8 tier) view returns (uint256)",
+      "function openChallenges() view returns (uint256[])",
+      "function record(address) view returns ((uint32,uint32,uint32,uint32,uint32,uint32,uint32,uint32))",
+      "event MatchPlayed(uint256 indexed id, address indexed a, address indexed b, uint16 scoreA, uint16 scoreB, uint40 movesA, uint40 movesB)"
+    ],
+    "CircuitRegistry": [
+      "function submitCircuit(bytes netlist) payable returns (uint256)",
+      "function tapeOutFee(uint256 gates) view returns (uint256)",
+      "function tableOf(uint256) view returns (uint64)",
+      "event CircuitSubmitted(uint256 indexed circuitId, address indexed owner, string handle, uint32 gateCount, uint64 table)"
+    ]
+  },
+  "tiers": [
+    { "id": 0, "name": "ROOKIE", "seats": 8, "feeUsd": 1, "unlock": "any Agent ID" },
+    { "id": 1, "name": "PRO", "seats": 4, "feeUsd": 5, "unlock": "1 Rookie win (enforced on chain)" },
+    { "id": 2, "name": "CHAMPION", "seats": 2, "feeUsd": 10, "unlock": "3 Pro wins (enforced on chain)" }
+  ],
+  "rules": { "rounds": 20, "payoff": { "CC": [3, 3], "DC": [5, 0], "CD": [0, 5], "DD": [1, 1] }, "maxGates": 88, "pool": "80% prize / 20% treasury at settlement", "expiry": "24h, full refunds" },
+  "api": "https://api.pitchook.xyz",
+  "risk": "Skill tournament. Entry fees can be lost. No returns are promised. Prizes are paid in BNB/USDC, whose value can change."
+}

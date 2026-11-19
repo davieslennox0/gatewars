@@ -1,7 +1,8 @@
 "use client";
 import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { usePublicClient } from "wagmi";
+import { usePC as usePublicClient } from "@/lib/client";
+import { useL } from "@/lib/i18n";
 import { parseAbiItem } from "viem";
 import { play, STARTERS as T } from "@gatewars/compiler";
 import { ADDR, displayName, STARTER_NAMES, TIERS } from "@/lib/contracts";
@@ -34,6 +35,7 @@ function useSubmitted() {
 }
 
 export default function Circuits() {
+  const L = useL();
   const { data: subs, isLoading } = useSubmitted();
   const { data: games } = useAllGames();
   const winners = useMemo(() => {
@@ -52,24 +54,24 @@ export default function Circuits() {
   return (
     <>
       <section style={{ padding: "40px 0 16px" }}>
-        <span className="label">HALL OF CIRCUITS · CIRCUITSUBMITTED</span>
-        <h1 style={{ marginTop: 10 }}>Every chip ever taped out.</h1>
-        <p className="ink3" style={{ maxWidth: 720 }}>Winning strategies first, then every submission. Tables are the cached 64-entry outputs; read rows as the opponent&apos;s last 3 moves.</p>
+        <span className="label">{L("电路名人堂 · CIRCUITSUBMITTED 事件", "HALL OF CIRCUITS · CIRCUITSUBMITTED")}</span>
+        <h1 style={{ marginTop: 10 }}>{L("所有流片过的芯片。", "Every chip ever taped out.")}</h1>
+        <p className="ink3" style={{ maxWidth: 720 }}>{L("先展示冠军策略，再展示全部提交。真值表为缓存的 64 项输出；行代表对手最近 3 步。", "Winning strategies first, then every submission. Tables are the cached 64-entry outputs; read rows as the opponent's last 3 moves.")}</p>
       </section>
 
       {champ && champVsTft && (
         <section className="section" style={{ marginTop: 8 }}>
-          <span className="label">LATEST WINNER · {TIERS[winners[0].tier]} #{String(winners[0].game)} · {winners[0].who}</span>
+          <span className="label">{L("最新冠军", "LATEST WINNER")} · {TIERS[winners[0].tier]} #{String(winners[0].game)} · {winners[0].who}</span>
           <div style={{ marginTop: 10 }}>
-            <DuelScope nameA={`#${champ.id}`} nameB="TIT_FOR_TAT" movesA={champVsTft.movesA} movesB={champVsTft.movesB} mode="replay" title={`WINNER #${champ.id} VS TIT_FOR_TAT`} />
+            <DuelScope nameA={`#${champ.id}`} nameB="TIT_FOR_TAT" movesA={champVsTft.movesA} movesB={champVsTft.movesB} mode="replay" title={`${L("冠军", "WINNER")} #${champ.id} VS TIT_FOR_TAT`} />
           </div>
         </section>
       )}
 
       <section className="section">
         <div className="section-head">
-          <h2>Submissions</h2>
-          <span className="label">{subs ? `${subs.length} CIRCUITS` : ""}</span>
+          <h2>{L("全部提交", "Submissions")}</h2>
+          <span className="label">{subs ? L(`${subs.length} 个电路`, `${subs.length} CIRCUITS`) : ""}</span>
         </div>
         {isLoading ? (
           <Skel w={240} />
@@ -85,7 +87,7 @@ export default function Circuits() {
                   gates={s.gates}
                   name={STARTER_NAMES[s.id] || (s.handle ? `${s.handle}.ai` : `${s.owner.slice(0, 6)}…`)}
                   table={BigInt(s.table)}
-                  note={`${wins.length ? `★ ${wins.length} WIN${wins.length > 1 ? "S" : ""} · ` : ""}vs ALWAYS_DEFECT ${vs.scoreA}–${vs.scoreB}`}
+                  note={`${wins.length ? `★ ${L(`${wins.length} 次夺冠`, `${wins.length} WIN${wins.length > 1 ? "S" : ""}`)} · ` : ""}${L("对永远背叛", "vs ALWAYS_DEFECT")} ${vs.scoreA}–${vs.scoreB}`}
                 />
               );
             })}

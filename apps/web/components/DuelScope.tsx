@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { movesString } from "@gatewars/compiler";
+import { useL } from "@/lib/i18n";
 
 const ROUNDS = 20;
 const W = 50; // px per round in the 1000-wide viewBox
@@ -71,6 +72,7 @@ type Props = {
 };
 
 export default function DuelScope({ nameA, nameB, movesA, movesB, title, mode = "demo", shareUrl, compact }: Props) {
+  const L = useL();
   const reduced = useReducedMotion();
   const A = movesString(movesA);
   const B = movesString(movesB);
@@ -122,7 +124,7 @@ export default function DuelScope({ nameA, nameB, movesA, movesB, title, mode = 
           DUELSCOPE · <b>{title ?? `${nameA} vs ${nameB}`}</b>
         </span>
         <span>
-          ROUND <b>{String(shown).padStart(2, "0")}/20</b>
+          {L("回合", "ROUND")} <b>{String(shown).padStart(2, "0")}/20</b>
         </span>
       </div>
       {[
@@ -136,9 +138,9 @@ export default function DuelScope({ nameA, nameB, movesA, movesB, title, mode = 
               {nm as string}
             </span>
           </div>
-          <Wave moves={mv as string} upto={shown} label={`${nm}: ${(mv as string).slice(0, shown) || "no moves yet"}`} />
+          <Wave moves={mv as string} upto={shown} label={`${nm}: ${(mv as string).slice(0, shown) || L("尚无走法", "no moves yet")}`} />
           <div className="score">
-            <div className="k">SCORE</div>
+            <div className="k">{L("得分", "SCORE")}</div>
             <div className="v">
               {compact ? sc : `${hex(sc as number)} / ${sc}`}
             </div>
@@ -147,12 +149,12 @@ export default function DuelScope({ nameA, nameB, movesA, movesB, title, mode = 
       ))}
       {mode === "replay" && (
         <div className="scope-ctrl">
-          <button className="btn outline icon" aria-label="Previous round" onClick={() => { setPlaying(false); setRound((r) => Math.max(0, Math.min(r, ROUNDS) - 1)); }}>
+          <button className="btn outline icon" aria-label={L("上一回合", "Previous round")} onClick={() => { setPlaying(false); setRound((r) => Math.max(0, Math.min(r, ROUNDS) - 1)); }}>
             ◀
           </button>
           <button
             className="btn icon"
-            aria-label={playing ? "Pause" : "Play"}
+            aria-label={playing ? L("暂停", "Pause") : L("播放", "Play")}
             onClick={() => {
               if (!playing && round >= ROUNDS) setRound(0);
               setPlaying(!playing);
@@ -160,10 +162,10 @@ export default function DuelScope({ nameA, nameB, movesA, movesB, title, mode = 
           >
             {playing ? "❚❚" : "▶"}
           </button>
-          <button className="btn outline icon" aria-label="Next round" onClick={() => { setPlaying(false); setRound((r) => Math.min(ROUNDS, r + 1)); }}>
+          <button className="btn outline icon" aria-label={L("下一回合", "Next round")} onClick={() => { setPlaying(false); setRound((r) => Math.min(ROUNDS, r + 1)); }}>
             ▶
           </button>
-          <input type="range" min={0} max={ROUNDS} value={shown} aria-label="Scrub rounds" onChange={(e) => { setPlaying(false); setRound(Number(e.target.value)); }} />
+          <input type="range" min={0} max={ROUNDS} value={shown} aria-label={L("拖动回合", "Scrub rounds")} onChange={(e) => { setPlaying(false); setRound(Number(e.target.value)); }} />
           {shareUrl && (
             <button
               className="btn outline"
@@ -174,7 +176,7 @@ export default function DuelScope({ nameA, nameB, movesA, movesB, title, mode = 
                 });
               }}
             >
-              {copied ? "COPIED" : "COPY REPLAY LINK"}
+              {copied ? L("已复制", "COPIED") : L("复制回放链接", "COPY REPLAY LINK")}
             </button>
           )}
         </div>
@@ -183,14 +185,14 @@ export default function DuelScope({ nameA, nameB, movesA, movesB, title, mode = 
         <span className="legend">
           <span>
             <i style={{ background: "var(--coop)" }} />
-            HIGH = C COOPERATE
+            {L("高 = C 合作", "HIGH = C COOPERATE")}
           </span>
           <span>
             <i style={{ background: "var(--defect)" }} />
-            LOW = D DEFECT
+            {L("低 = D 背叛", "LOW = D DEFECT")}
           </span>
         </span>
-        <span>PAYOFF CC 3/3 · DC 5/0 · CD 0/5 · DD 1/1</span>
+        <span>{L("收益", "PAYOFF")} CC 3/3 · DC 5/0 · CD 0/5 · DD 1/1</span>
       </div>
     </div>
   );
@@ -198,6 +200,7 @@ export default function DuelScope({ nameA, nameB, movesA, movesB, title, mode = 
 
 /** Grid: 60px label column + 20 rounds; rows R / A / B / PAY; current round highlighted. */
 export function MoveLog({ movesA, movesB, round = 20 }: { movesA: number | bigint; movesB: number | bigint; round?: number }) {
+  const L = useL();
   const A = movesString(movesA);
   const B = movesString(movesB);
   const cells: JSX.Element[] = [];
@@ -208,7 +211,7 @@ export function MoveLog({ movesA, movesB, round = 20 }: { movesA: number | bigin
     cells.push(<div key={`l${lbl}`} className="rl">{lbl}</div>);
     for (let r = 0; r < 20; r++) cells.push(<div key={`${lbl}${r}`} className={`${row[r]}${cur(r)}`}>{row[r]}</div>);
   }
-  cells.push(<div key="lp" className="rl">PAY</div>);
+  cells.push(<div key="lp" className="rl">{L("收益", "PAY")}</div>);
   for (let r = 0; r < 20; r++) {
     const [pa, pb] = payoff(A[r], B[r]);
     cells.push(<div key={`p${r}`} className={`ink3${cur(r)}`}>{pa}/{pb}</div>);
