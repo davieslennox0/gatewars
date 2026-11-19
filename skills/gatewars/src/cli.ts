@@ -1,7 +1,7 @@
 import { decodeEventLog, encodeFunctionData, formatEther, formatUnits, type Address, type Hex } from "viem";
 import { compile, inspect, play, tableHex, vsStarters, MAX_GATES } from "@gatewars/compiler";
 import { ADDR, ASSETS, RISK, STARTER_IDS, STATES, TIERS, agentIdAbi, arenaAbi, client, erc20Abi, registryAbi } from "./chain.js";
-import { execute, preview, requireDevMode, walletAddress } from "./wallet.js";
+import { baw, execute, preview, requireDevMode, walletAddress } from "./wallet.js";
 
 const out = (s = "") => process.stdout.write(s + "\n");
 
@@ -50,6 +50,12 @@ async function game(id: bigint) {
 async function status() {
   const me = walletAddress();
   out(`wallet ${me} (${await handle(me)})`);
+  try {
+    const a = baw(["wallet", "agent-id"]);
+    out(a.claimed ? `agent id: ${a.agentId} (claimed)` : "agent id: NOT CLAIMED — claim one in the Binance App (Web3 wallet -> Agent ID); GateWars requires it");
+  } catch (e) {
+    out(`agent id: could not check via baw (${e instanceof Error ? e.message.slice(0, 120) : e}); on-chain check is used for every action`);
+  }
   for (const t of [0, 1]) {
     const id = await client.readContract({ address: ADDR.arena, abi: arenaAbi, functionName: "openBracket", args: [t] });
     const q = await quote(t);
