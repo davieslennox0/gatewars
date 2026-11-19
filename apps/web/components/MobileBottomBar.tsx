@@ -1,16 +1,18 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useQuotes } from "@/lib/data";
 import EntrySheet from "./EntrySheet";
 
 /** Mobile only (< 960px): builder shortcut + primary "ENTER ROOKIE · $1" opening the entry sheet. */
 export default function MobileBottomBar() {
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false); // client-only: avoids a layout shift during hydration/font swap
+  useEffect(() => setMounted(true), []);
   const { data: q } = useQuotes();
   const path = usePathname();
-  if (path.startsWith("/agents") || path.startsWith("/rules")) return null;
+  if (!mounted || path.startsWith("/agents") || path.startsWith("/rules")) return null;
   const usd = q ? `$${(Number(q[0].usd) / 1e8).toFixed(0)}` : "$1";
   return (
     <>
