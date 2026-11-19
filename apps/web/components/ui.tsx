@@ -41,7 +41,8 @@ export function useTx() {
   const { writeContractAsync, isPending, error, reset } = useWriteContract();
   const [hash, setHash] = useState<`0x${string}`>();
   const rc = useWaitForTransactionReceipt({ hash });
-  const send = async (args: Parameters<typeof writeContractAsync>[0]) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const send = async (args: any) => {
     reset();
     const h = await writeContractAsync(args);
     setHash(h);
