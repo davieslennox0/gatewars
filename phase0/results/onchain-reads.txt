@@ -1,0 +1,23 @@
+# on-chain reads, 2026-11-19T08:44:23Z, block 134473452, via https://bsc-dataseed.bnbchain.org
+factory.isSealed            false
+factory.owner               0xB3D85b42A045c1A88D800CAD0F55d2566a4D3138
+factory impl (ERC1967)      0x00000000000000000000000051535d8e41fe8e9b26134ed6deeee71a66b33fc4
+factory.bem                 0x5ce033B2bFCa3Af30b3e8C8457DeaF776A8b695a
+factory.deployFee           10000000 [1e7]
+factory.protocolFee         1000000 [1e6]
+factory.cpuCount            1495
+circuit beacon impl         0x8E1D125Def6d3826C278299273a0760D47626068
+transistor beacon impl      0x32e1fa125B6Abe0FF12eeC43E2daB482019a1E97
+0xb1024b89886B9a34Aa4ff5F31C411D708b20a14C name="TapeOut" P=1 TAPEOUT_FEE=200000000000000 [2e14] nextId=18343 [1.834e4] transistors=0xCC42ba5De07f01B472a5b14cF45aBcCA79Eb8087 mintPrice=500000000000000 [5e14] minted=1000000 [1e6] cap=1000000 [1e6]
+0x1F5Cb4aeaE1807Bf60c3b9C0D8aDBCC14e91f12C name="Blonskr_No1" P=6 TAPEOUT_FEE=200000000000000 [2e14] nextId=2781 transistors=0xE2DfD802081C7a05341E20b6582b04b908e8550c mintPrice=500000000000000 [5e14] minted=100000 [1e5] cap=100000 [1e5]
+PodMining proxy 0x7E2E0DC66a3bD9103E69b766afA62d9f7b697b46 impl 0x000000000000000000000000a3dbe873da37cd4e4a13c7cef23a7db6ca60f898
+PodMining.owner()(address) 0x0000000000000000000000000000000000000000
+PodMining.tasksFrozen()(bool) true
+PodMining.paused()(bool) false
+PodMining.taskCount()(uint32) 267
+PodMining.totalUnverWeight()(uint256) 41297 [4.129e4]
+PodMining.totalVerifWeight()(uint256) 1613102 [1.613e6]
+PodMining.totalMined()(uint256) 57079622350470 [5.707e13]
+PodMining.token()(address) 0x5ce033B2bFCa3Af30b3e8C8457DeaF776A8b695a
+BEM.minter 0x7E2E0DC66a3bD9103E69b766afA62d9f7b697b46 totalSupply 57079622350470 [5.707e13]
+AgentID.name "SPACE ID Agent ID" owner 0x457C1fd14750c6c30886A2f2B57F1eF44B095882

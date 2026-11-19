@@ -1,0 +1,140 @@
+fork block ~134473388, 2026-11-19T08:43:54Z, forge Version: 1.9.0, eth_gasPrice 50000000 wei
+No files changed, compilation skipped
+
+Ran 11 tests for test/Phase0.t.sol:Phase0Test
+[PASS] test_A2_tapeoutViaContract() (gas: 2270687)
+Logs:
+  createCPU: deployFee (raw) 10000000 BEM spent (1e8 units) 10000000
+  mint 2000 NAND: BNB spent 0 BEM spent 1002000
+  tapeout ALLD: id / gas / netlist bytes 1 256197 7
+  tapeout TFT: id / gas / netlist bytes 2 224761 14
+  tapeout GRIM: id / gas / netlist bytes 3 224765 14
+  tapeout LUT_RANDOM: id / gas / netlist bytes 4 463722 602
+  tapeout ARGMAX8x10: id / gas / netlist bytes 5 4255418 9856
+  tapeout TFT via contract: gas 265636
+
+[PASS] test_A3_thirdPartyEvalIsViewAndFree() (gas: 165182)
+Logs:
+  createCPU: deployFee (raw) 10000000 BEM spent (1e8 units) 10000000
+  mint 2000 NAND: BNB spent 0 BEM spent 1002000
+  tapeout ALLD: id / gas / netlist bytes 1 256197 7
+  tapeout TFT: id / gas / netlist bytes 2 224761 14
+  tapeout GRIM: id / gas / netlist bytes 3 224765 14
+  tapeout LUT_RANDOM: id / gas / netlist bytes 4 463722 602
+  tapeout ARGMAX8x10: id / gas / netlist bytes 5 4255418 9856
+
+[PASS] test_B5_eval1204GateMainnetCircuit() (gas: 5518593)
+Logs:
+  createCPU: deployFee (raw) 10000000 BEM spent (1e8 units) 10000000
+  mint 2000 NAND: BNB spent 0 BEM spent 1002000
+  tapeout ALLD: id / gas / netlist bytes 1 256197 7
+  tapeout TFT: id / gas / netlist bytes 2 224761 14
+  tapeout GRIM: id / gas / netlist bytes 3 224765 14
+  tapeout LUT_RANDOM: id / gas / netlist bytes 4 463722 602
+  tapeout ARGMAX8x10: id / gas / netlist bytes 5 4255418 9856
+  eval mainnet 0x5484..#1 gates / cold / warm 1204 2746567 2751132
+    warm gas per gate x100 228499
+
+[PASS] test_B5_evalOnce() (gas: 684322)
+Logs:
+  createCPU: deployFee (raw) 10000000 BEM spent (1e8 units) 10000000
+  mint 2000 NAND: BNB spent 0 BEM spent 1002000
+  tapeout ALLD: id / gas / netlist bytes 1 256197 7
+  tapeout TFT: id / gas / netlist bytes 2 224761 14
+  tapeout GRIM: id / gas / netlist bytes 3 224765 14
+  tapeout LUT_RANDOM: id / gas / netlist bytes 4 463722 602
+  tapeout ARGMAX8x10: id / gas / netlist bytes 5 4255418 9856
+  eval ALLD gates / cold gas / warm gas 1 33502 33499
+  eval TFT gates / cold gas / warm gas 2 36006 35740
+  eval GRIM gates / cold gas / warm gas 2 35741 35741
+  eval LUT_RANDOM gates / cold gas / warm gas 86 225065 224801
+
+[PASS] test_B6_cacheBuild() (gas: 18325994)
+Logs:
+  createCPU: deployFee (raw) 10000000 BEM spent (1e8 units) 10000000
+  mint 2000 NAND: BNB spent 0 BEM spent 1002000
+  tapeout ALLD: id / gas / netlist bytes 1 256197 7
+  tapeout TFT: id / gas / netlist bytes 2 224761 14
+  tapeout GRIM: id / gas / netlist bytes 3 224765 14
+  tapeout LUT_RANDOM: id / gas / netlist bytes 4 463722 602
+  tapeout ARGMAX8x10: id / gas / netlist bytes 5 4255418 9856
+  cache64 ALLD exec gas 924802
+  cache64 TFT exec gas 1097342
+  cache64 GRIM exec gas 1092734
+  cache64 LUT_RANDOM exec gas 13197694
+
+[PASS] test_B6_cacheSplit() (gas: 13748832)
+Logs:
+  createCPU: deployFee (raw) 10000000 BEM spent (1e8 units) 10000000
+  mint 2000 NAND: BNB spent 0 BEM spent 1002000
+  tapeout ALLD: id / gas / netlist bytes 1 256197 7
+  tapeout TFT: id / gas / netlist bytes 2 224761 14
+  tapeout GRIM: id / gas / netlist bytes 3 224765 14
+  tapeout LUT_RANDOM: id / gas / netlist bytes 4 463722 602
+  tapeout ARGMAX8x10: id / gas / netlist bytes 5 4255418 9856
+  cache LUT split 2x32 exec gas 6630061 6614379
+
+[PASS] test_B7_match() (gas: 54021)
+Logs:
+  createCPU: deployFee (raw) 10000000 BEM spent (1e8 units) 10000000
+  mint 2000 NAND: BNB spent 0 BEM spent 1002000
+  tapeout ALLD: id / gas / netlist bytes 1 256197 7
+  tapeout TFT: id / gas / netlist bytes 2 224761 14
+  tapeout GRIM: id / gas / netlist bytes 3 224765 14
+  tapeout LUT_RANDOM: id / gas / netlist bytes 4 463722 602
+  tapeout ARGMAX8x10: id / gas / netlist bytes 5 4255418 9856
+  match TFT vs ALLD rounds / gas / scores 10 10526 9014
+  match TFT vs ALLD rounds / gas / scores 20 15314 19024
+
+[PASS] test_B8_settleRookieAndPro() (gas: 797343)
+Logs:
+  createCPU: deployFee (raw) 10000000 BEM spent (1e8 units) 10000000
+  mint 2000 NAND: BNB spent 0 BEM spent 1002000
+  tapeout ALLD: id / gas / netlist bytes 1 256197 7
+  tapeout TFT: id / gas / netlist bytes 2 224761 14
+  tapeout GRIM: id / gas / netlist bytes 3 224765 14
+  tapeout LUT_RANDOM: id / gas / netlist bytes 4 463722 602
+  tapeout ARGMAX8x10: id / gas / netlist bytes 5 4255418 9856
+  settle rounds / rookie(8p,28m) gas / pro(4p,6m) gas 10 208434 69592
+    winners 2 1
+  settle rounds / rookie(8p,28m) gas / pro(4p,6m) gas 20 330488 98335
+    winners 2 1
+
+[PASS] test_B9_argmaxSolidity() (gas: 3254813)
+Logs:
+  createCPU: deployFee (raw) 10000000 BEM spent (1e8 units) 10000000
+  mint 2000 NAND: BNB spent 0 BEM spent 1002000
+  tapeout ALLD: id / gas / netlist bytes 1 256197 7
+  tapeout TFT: id / gas / netlist bytes 2 224761 14
+  tapeout GRIM: id / gas / netlist bytes 3 224765 14
+  tapeout LUT_RANDOM: id / gas / netlist bytes 4 463722 602
+  tapeout ARGMAX8x10: id / gas / netlist bytes 5 4255418 9856
+  argmax solidity (external call) gas 9111
+  argmax via TapeOut circuit (external call) gas 3238475
+
+[PASS] test_B9_evalArgmaxCircuit() (gas: 6465311)
+Logs:
+  createCPU: deployFee (raw) 10000000 BEM spent (1e8 units) 10000000
+  mint 2000 NAND: BNB spent 0 BEM spent 1002000
+  tapeout ALLD: id / gas / netlist bytes 1 256197 7
+  tapeout TFT: id / gas / netlist bytes 2 224761 14
+  tapeout GRIM: id / gas / netlist bytes 3 224765 14
+  tapeout LUT_RANDOM: id / gas / netlist bytes 4 463722 602
+  tapeout ARGMAX8x10: id / gas / netlist bytes 5 4255418 9856
+  eval ARGMAX8x10 gates / cold / warm 1408 3229112 3228795
+    warm gas per gate x100 229317
+
+[PASS] test_D14_agentId() (gas: 58546)
+Logs:
+  createCPU: deployFee (raw) 10000000 BEM spent (1e8 units) 10000000
+  mint 2000 NAND: BNB spent 0 BEM spent 1002000
+  tapeout ALLD: id / gas / netlist bytes 1 256197 7
+  tapeout TFT: id / gas / netlist bytes 2 224761 14
+  tapeout GRIM: id / gas / netlist bytes 3 224765 14
+  tapeout LUT_RANDOM: id / gas / netlist bytes 4 463722 602
+  tapeout ARGMAX8x10: id / gas / netlist bytes 5 4255418 9856
+  handleOf(owner wallet) syke
+
+Suite result: ok. 11 passed; 0 failed; 0 skipped; finished in 1.79s (775.04ms CPU time)
+
+Ran 1 test suite in 1.80s (1.79s CPU time): 11 tests passed, 0 failed, 0 skipped (11 total tests)

@@ -1,0 +1,18 @@
+# PancakeSwap V3 QuoterV2 0xB048Bbc1Ee6b733FFfCFb9e9CeF7375518e25997, quoteExactInput via eth_call
+# block 134471499 (2026-11-19 ~08:3x UTC), node https://bsc-dataseed.bnbchain.org
+# "impact vs tiny" = shortfall vs the same path quoted at 1/1000 of the size (pool fee excluded from impact)
+1 WBNB->USDT fee 100 589.0606852159282 gas 115760
+1 WBNB->USDT fee 500 588.8356681509446 gas 115359
+$  6.4 0.010865 BNB via WBNB-1%-BEM: 0.603063 BEM, eff $10.6125/BEM, impact vs tiny 0.006%, gas 94099
+$  6.4 0.010865 BNB via WBNB-0.01%-USDT-0.01%-BEM: 0.608699 BEM, eff $10.5142/BEM, impact vs tiny 0.023%, gas 210698
+$  6.4 0.010865 BNB via WBNB-0.01%-USDT-1%-BEM: 0.608413 BEM, eff $10.5192/BEM, impact vs tiny 0.004%, gas 211066
+$   16 0.027162 BNB via WBNB-1%-BEM: 1.507498 BEM, eff $10.6136/BEM, impact vs tiny 0.017%, gas 95103
+$   16 0.027162 BNB via WBNB-0.01%-USDT-0.01%-BEM: 1.521186 BEM, eff $10.5181/BEM, impact vs tiny 0.061%, gas 210710
+$   16 0.027162 BNB via WBNB-0.01%-USDT-1%-BEM: 1.520924 BEM, eff $10.5199/BEM, impact vs tiny 0.012%, gas 187464
+$   64 0.108648 BNB via WBNB-1%-BEM: 6.026818 BEM, eff $10.6192/BEM, impact vs tiny 0.070%, gas 95101
+$   64 0.108648 BNB via WBNB-0.01%-USDT-0.01%-BEM: 6.073538 BEM, eff $10.5375/BEM, impact vs tiny 0.246%, gas 187120
+$   64 0.108648 BNB via WBNB-0.01%-USDT-1%-BEM: 6.081460 BEM, eff $10.5238/BEM, impact vs tiny 0.049%, gas 187490
+# GeckoTerminal pools (api.geckoterminal.com/api/v2/networks/bsc/tokens/0x5ce0.../pools), same session:
+# PCS v3 BEM/USDT 1%  0x3098d7a051045000d68ec0360753a40c8cabea31 liq $144,475 vol24h $255,800
+# PCS v3 BEM/USDT .01% 0x2f5ec19ab0583d3fcd9bcbcd9ab416d2858eea38 liq $55,558  vol24h $239,379
+# PCS v3 BEM/WBNB 1%  0x28b12792f9d81bd529bc5572434e861c9edbbbc2 liq $70,052  vol24h $107,686

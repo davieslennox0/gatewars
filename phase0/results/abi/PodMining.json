@@ -1,0 +1,2860 @@
+[
+ {
+  "type": "constructor",
+  "inputs": [],
+  "stateMutability": "nonpayable"
+ },
+ {
+  "name": "AddressEmptyCode",
+  "type": "error",
+  "inputs": [
+   {
+    "name": "target",
+    "type": "address",
+    "internalType": "address"
+   }
+  ]
+ },
+ {
+  "name": "Adr0",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "Anc",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "Arm",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "Badn",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "Big",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "Bovf",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "Cap",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "Ce",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "Comb",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "Corr",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "Cpu",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "Dovf",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "Dupc",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "ERC1967InvalidImplementation",
+  "type": "error",
+  "inputs": [
+   {
+    "name": "implementation",
+    "type": "address",
+    "internalType": "address"
+   }
+  ]
+ },
+ {
+  "name": "ERC1967NonPayable",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "Emp",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "EnforcedPause",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "ExpectedPause",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "FailedCall",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "Fz",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "Hld",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "Hovf",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "Idovf",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "Idx",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "InvalidInitialization",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "Lt",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "Mng",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "Mult",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "Nct2",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "Nocmt",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "Nomn",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "NotInitializing",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "Nrc",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "Nref",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "Ntk",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "Oanc",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "OwnableInvalidOwner",
+  "type": "error",
+  "inputs": [
+   {
+    "name": "owner",
+    "type": "address",
+    "internalType": "address"
+   }
+  ]
+ },
+ {
+  "name": "OwnableUnauthorizedAccount",
+  "type": "error",
+  "inputs": [
+   {
+    "name": "account",
+    "type": "address",
+    "internalType": "address"
+   }
+  ]
+ },
+ {
+  "name": "Ownr",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "Parm",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "Pins",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "Prf",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "Rise",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "Seal",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "Sht",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "Sht2",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "Smp",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "Tok0",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "Tsk",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "UUPSUnauthorizedCallContext",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "UUPSUnsupportedProxiableUUID",
+  "type": "error",
+  "inputs": [
+   {
+    "name": "slot",
+    "type": "bytes32",
+    "internalType": "bytes32"
+   }
+  ]
+ },
+ {
+  "name": "Wors",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "Wrm",
+  "type": "error",
+  "inputs": []
+ },
+ {
+  "name": "Claimed",
+  "type": "event",
+  "inputs": [
+   {
+    "name": "key",
+    "type": "bytes32",
+    "indexed": true,
+    "internalType": "bytes32"
+   },
+   {
+    "name": "to",
+    "type": "address",
+    "indexed": true,
+    "internalType": "address"
+   },
+   {
+    "name": "amount",
+    "type": "uint256",
+    "indexed": false,
+    "internalType": "uint256"
+   }
+  ],
+  "anonymous": false
+ },
+ {
+  "name": "CounterexampleAdded",
+  "type": "event",
+  "inputs": [
+   {
+    "name": "taskId",
+    "type": "uint32",
+    "indexed": true,
+    "internalType": "uint32"
+   },
+   {
+    "name": "circuits",
+    "type": "address",
+    "indexed": true,
+    "internalType": "address"
+   },
+   {
+    "name": "circuitId",
+    "type": "uint256",
+    "indexed": true,
+    "internalType": "uint256"
+   },
+   {
+    "name": "by",
+    "type": "address",
+    "indexed": false,
+    "internalType": "address"
+   },
+   {
+    "name": "added",
+    "type": "bool",
+    "indexed": false,
+    "internalType": "bool"
+   },
+   {
+    "name": "input",
+    "type": "bytes",
+    "indexed": false,
+    "internalType": "bytes"
+   }
+  ],
+  "anonymous": false
+ },
+ {
+  "name": "Demoted",
+  "type": "event",
+  "inputs": [
+   {
+    "name": "key",
+    "type": "bytes32",
+    "indexed": true,
+    "internalType": "bytes32"
+   },
+   {
+    "name": "circuits",
+    "type": "address",
+    "indexed": true,
+    "internalType": "address"
+   },
+   {
+    "name": "circuitId",
+    "type": "uint256",
+    "indexed": false,
+    "internalType": "uint256"
+   },
+   {
+    "name": "taskId",
+    "type": "uint32",
+    "indexed": false,
+    "internalType": "uint32"
+   }
+  ],
+  "anonymous": false
+ },
+ {
+  "name": "DesignCommitted",
+  "type": "event",
+  "inputs": [
+   {
+    "name": "commitment",
+    "type": "bytes32",
+    "indexed": true,
+    "internalType": "bytes32"
+   },
+   {
+    "name": "designer",
+    "type": "address",
+    "indexed": true,
+    "internalType": "address"
+   },
+   {
+    "name": "circuits",
+    "type": "address",
+    "indexed": true,
+    "internalType": "address"
+   },
+   {
+    "name": "blockNumber",
+    "type": "uint256",
+    "indexed": false,
+    "internalType": "uint256"
+   },
+   {
+    "name": "firstUnusedId",
+    "type": "uint64",
+    "indexed": false,
+    "internalType": "uint64"
+   }
+  ],
+  "anonymous": false
+ },
+ {
+  "name": "FormulaSet",
+  "type": "event",
+  "inputs": [
+   {
+    "name": "lambda",
+    "type": "uint16",
+    "indexed": false,
+    "internalType": "uint16"
+   },
+   {
+    "name": "beta",
+    "type": "uint8",
+    "indexed": false,
+    "internalType": "uint8"
+   },
+   {
+    "name": "lambdaBurn",
+    "type": "uint16",
+    "indexed": false,
+    "internalType": "uint16"
+   }
+  ],
+  "anonymous": false
+ },
+ {
+  "name": "Initialized",
+  "type": "event",
+  "inputs": [
+   {
+    "name": "version",
+    "type": "uint64",
+    "indexed": false,
+    "internalType": "uint64"
+   }
+  ],
+  "anonymous": false
+ },
+ {
+  "name": "OwnershipTransferred",
+  "type": "event",
+  "inputs": [
+   {
+    "name": "previousOwner",
+    "type": "address",
+    "indexed": true,
+    "internalType": "address"
+   },
+   {
+    "name": "newOwner",
+    "type": "address",
+    "indexed": true,
+    "internalType": "address"
+   }
+  ],
+  "anonymous": false
+ },
+ {
+  "name": "ParamsSet",
+  "type": "event",
+  "inputs": [
+   {
+    "name": "maxSamples",
+    "type": "uint32",
+    "indexed": false,
+    "internalType": "uint32"
+   },
+   {
+    "name": "maxRunGas",
+    "type": "uint256",
+    "indexed": false,
+    "internalType": "uint256"
+   },
+   {
+    "name": "sampleGasBudget",
+    "type": "uint256",
+    "indexed": false,
+    "internalType": "uint256"
+   }
+  ],
+  "anonymous": false
+ },
+ {
+  "name": "Paused",
+  "type": "event",
+  "inputs": [
+   {
+    "name": "account",
+    "type": "address",
+    "indexed": false,
+    "internalType": "address"
+   }
+  ],
+  "anonymous": false
+ },
+ {
+  "name": "ProcessorSet",
+  "type": "event",
+  "inputs": [
+   {
+    "name": "circuits",
+    "type": "address",
+    "indexed": true,
+    "internalType": "address"
+   },
+   {
+    "name": "multiplier",
+    "type": "uint256",
+    "indexed": false,
+    "internalType": "uint256"
+   }
+  ],
+  "anonymous": false
+ },
+ {
+  "name": "Reclaimed",
+  "type": "event",
+  "inputs": [
+   {
+    "name": "key",
+    "type": "bytes32",
+    "indexed": true,
+    "internalType": "bytes32"
+   },
+   {
+    "name": "taskId",
+    "type": "uint32",
+    "indexed": true,
+    "internalType": "uint32"
+   },
+   {
+    "name": "bonus",
+    "type": "uint64",
+    "indexed": false,
+    "internalType": "uint64"
+   }
+  ],
+  "anonymous": false
+ },
+ {
+  "name": "Revoked",
+  "type": "event",
+  "inputs": [
+   {
+    "name": "key",
+    "type": "bytes32",
+    "indexed": true,
+    "internalType": "bytes32"
+   },
+   {
+    "name": "challenger",
+    "type": "address",
+    "indexed": true,
+    "internalType": "address"
+   },
+   {
+    "name": "vectorIndex",
+    "type": "uint32",
+    "indexed": false,
+    "internalType": "uint32"
+   }
+  ],
+  "anonymous": false
+ },
+ {
+  "name": "Sealed",
+  "type": "event",
+  "inputs": [],
+  "anonymous": false
+ },
+ {
+  "name": "Started",
+  "type": "event",
+  "inputs": [
+   {
+    "name": "key",
+    "type": "bytes32",
+    "indexed": true,
+    "internalType": "bytes32"
+   },
+   {
+    "name": "circuits",
+    "type": "address",
+    "indexed": true,
+    "internalType": "address"
+   },
+   {
+    "name": "circuitId",
+    "type": "uint256",
+    "indexed": true,
+    "internalType": "uint256"
+   },
+   {
+    "name": "taskId",
+    "type": "uint32",
+    "indexed": false,
+    "internalType": "uint32"
+   },
+   {
+    "name": "registrant",
+    "type": "address",
+    "indexed": false,
+    "internalType": "address"
+   },
+   {
+    "name": "bstar",
+    "type": "uint64",
+    "indexed": false,
+    "internalType": "uint64"
+   },
+   {
+    "name": "bonus",
+    "type": "uint64",
+    "indexed": false,
+    "internalType": "uint64"
+   },
+   {
+    "name": "optimal",
+    "type": "bool",
+    "indexed": false,
+    "internalType": "bool"
+   },
+   {
+    "name": "verifWeight",
+    "type": "uint256",
+    "indexed": false,
+    "internalType": "uint256"
+   },
+   {
+    "name": "unverWeight",
+    "type": "uint256",
+    "indexed": false,
+    "internalType": "uint256"
+   },
+   {
+    "name": "samplesChecked",
+    "type": "uint32",
+    "indexed": false,
+    "internalType": "uint32"
+   }
+  ],
+  "anonymous": false
+ },
+ {
+  "name": "Stopped",
+  "type": "event",
+  "inputs": [
+   {
+    "name": "key",
+    "type": "bytes32",
+    "indexed": true,
+    "internalType": "bytes32"
+   },
+   {
+    "name": "by",
+    "type": "address",
+    "indexed": true,
+    "internalType": "address"
+   }
+  ],
+  "anonymous": false
+ },
+ {
+  "name": "TaskAdded",
+  "type": "event",
+  "inputs": [
+   {
+    "name": "taskId",
+    "type": "uint32",
+    "indexed": true,
+    "internalType": "uint32"
+   },
+   {
+    "name": "name",
+    "type": "string",
+    "indexed": false,
+    "internalType": "string"
+   },
+   {
+    "name": "kind",
+    "type": "uint8",
+    "indexed": false,
+    "internalType": "uint8"
+   },
+   {
+    "name": "cycles",
+    "type": "uint32",
+    "indexed": false,
+    "internalType": "uint32"
+   },
+   {
+    "name": "nIn",
+    "type": "uint32",
+    "indexed": false,
+    "internalType": "uint32"
+   },
+   {
+    "name": "nOut",
+    "type": "uint32",
+    "indexed": false,
+    "internalType": "uint32"
+   },
+   {
+    "name": "vectorCount",
+    "type": "uint32",
+    "indexed": false,
+    "internalType": "uint32"
+   },
+   {
+    "name": "vectorsRoot",
+    "type": "bytes32",
+    "indexed": false,
+    "internalType": "bytes32"
+   },
+   {
+    "name": "refCircuits",
+    "type": "address",
+    "indexed": false,
+    "internalType": "address"
+   },
+   {
+    "name": "refCircuitId",
+    "type": "uint256",
+    "indexed": false,
+    "internalType": "uint256"
+   },
+   {
+    "name": "refArea",
+    "type": "uint64",
+    "indexed": false,
+    "internalType": "uint64"
+   },
+   {
+    "name": "refCost",
+    "type": "uint256",
+    "indexed": false,
+    "internalType": "uint256"
+   }
+  ],
+  "anonymous": false
+ },
+ {
+  "name": "TaskClosed",
+  "type": "event",
+  "inputs": [
+   {
+    "name": "taskId",
+    "type": "uint32",
+    "indexed": true,
+    "internalType": "uint32"
+   }
+  ],
+  "anonymous": false
+ },
+ {
+  "name": "TasksFrozen",
+  "type": "event",
+  "inputs": [],
+  "anonymous": false
+ },
+ {
+  "name": "Unpaused",
+  "type": "event",
+  "inputs": [
+   {
+    "name": "account",
+    "type": "address",
+    "indexed": false,
+    "internalType": "address"
+   }
+  ],
+  "anonymous": false
+ },
+ {
+  "name": "Upgraded",
+  "type": "event",
+  "inputs": [
+   {
+    "name": "implementation",
+    "type": "address",
+    "indexed": true,
+    "internalType": "address"
+   }
+  ],
+  "anonymous": false
+ },
+ {
+  "name": "HALVING_PERIOD",
+  "type": "function",
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "",
+    "type": "uint256",
+    "internalType": "uint256"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "INITIAL_RATE",
+  "type": "function",
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "",
+    "type": "uint256",
+    "internalType": "uint256"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "KIND_COMB",
+  "type": "function",
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "",
+    "type": "uint8",
+    "internalType": "uint8"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "KIND_SEQ",
+  "type": "function",
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "",
+    "type": "uint8",
+    "internalType": "uint8"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "MAX_ANCHOR_AGE",
+  "type": "function",
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "",
+    "type": "uint256",
+    "internalType": "uint256"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "MAX_CYCLES",
+  "type": "function",
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "",
+    "type": "uint32",
+    "internalType": "uint32"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "MAX_REF_AREA",
+  "type": "function",
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "",
+    "type": "uint64",
+    "internalType": "uint64"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "MAX_REF_LEVELS",
+  "type": "function",
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "",
+    "type": "uint256",
+    "internalType": "uint256"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "MIN_SAMPLES",
+  "type": "function",
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "",
+    "type": "uint32",
+    "internalType": "uint32"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "NAND_PER_TOKEN",
+  "type": "function",
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "",
+    "type": "uint256",
+    "internalType": "uint256"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "OWNER_HEAD_START",
+  "type": "function",
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "",
+    "type": "uint256",
+    "internalType": "uint256"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "QCAP",
+  "type": "function",
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "",
+    "type": "uint256",
+    "internalType": "uint256"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "STOP_COOLDOWN",
+  "type": "function",
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "",
+    "type": "uint256",
+    "internalType": "uint256"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "UNVERIFIED_BPS",
+  "type": "function",
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "",
+    "type": "uint16",
+    "internalType": "uint16"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "UPGRADE_INTERFACE_VERSION",
+  "type": "function",
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "",
+    "type": "string",
+    "internalType": "string"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "accUnver",
+  "type": "function",
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "",
+    "type": "uint256",
+    "internalType": "uint256"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "accVerif",
+  "type": "function",
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "",
+    "type": "uint256",
+    "internalType": "uint256"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "addTask",
+  "type": "function",
+  "inputs": [
+   {
+    "name": "name_",
+    "type": "string",
+    "internalType": "string"
+   },
+   {
+    "name": "kind",
+    "type": "uint8",
+    "internalType": "uint8"
+   },
+   {
+    "name": "cycles",
+    "type": "uint32",
+    "internalType": "uint32"
+   },
+   {
+    "name": "nIn",
+    "type": "uint32",
+    "internalType": "uint32"
+   },
+   {
+    "name": "nOut",
+    "type": "uint32",
+    "internalType": "uint32"
+   },
+   {
+    "name": "vectorCount",
+    "type": "uint32",
+    "internalType": "uint32"
+   },
+   {
+    "name": "vectorsRoot",
+    "type": "bytes32",
+    "internalType": "bytes32"
+   },
+   {
+    "name": "refCircuits",
+    "type": "address",
+    "internalType": "address"
+   },
+   {
+    "name": "refCircuitId",
+    "type": "uint256",
+    "internalType": "uint256"
+   },
+   {
+    "name": "anchorBlock",
+    "type": "uint256",
+    "internalType": "uint256"
+   },
+   {
+    "name": "inputs",
+    "type": "bytes[]",
+    "internalType": "bytes[]"
+   },
+   {
+    "name": "expectedOuts",
+    "type": "bytes[]",
+    "internalType": "bytes[]"
+   },
+   {
+    "name": "proofs",
+    "type": "bytes32[][]",
+    "internalType": "bytes32[][]"
+   }
+  ],
+  "outputs": [
+   {
+    "name": "taskId",
+    "type": "uint32",
+    "internalType": "uint32"
+   }
+  ],
+  "stateMutability": "nonpayable"
+ },
+ {
+  "name": "areaOf",
+  "type": "function",
+  "inputs": [
+   {
+    "name": "gateCount",
+    "type": "uint32",
+    "internalType": "uint32"
+   },
+   {
+    "name": "stateCount",
+    "type": "uint32",
+    "internalType": "uint32"
+   }
+  ],
+  "outputs": [
+   {
+    "name": "",
+    "type": "uint64",
+    "internalType": "uint64"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "arm",
+  "type": "function",
+  "inputs": [
+   {
+    "name": "circuits",
+    "type": "address",
+    "internalType": "address"
+   },
+   {
+    "name": "circuitId",
+    "type": "uint256",
+    "internalType": "uint256"
+   }
+  ],
+  "outputs": [],
+  "stateMutability": "nonpayable"
+ },
+ {
+  "name": "armedAt",
+  "type": "function",
+  "inputs": [
+   {
+    "name": "",
+    "type": "bytes32",
+    "internalType": "bytes32"
+   }
+  ],
+  "outputs": [
+   {
+    "name": "",
+    "type": "uint64",
+    "internalType": "uint64"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "bestSlot",
+  "type": "function",
+  "inputs": [
+   {
+    "name": "",
+    "type": "uint32",
+    "internalType": "uint32"
+   },
+   {
+    "name": "",
+    "type": "address",
+    "internalType": "address"
+   }
+  ],
+  "outputs": [
+   {
+    "name": "holderPlus1",
+    "type": "uint64",
+    "internalType": "uint64"
+   },
+   {
+    "name": "cost",
+    "type": "uint256",
+    "internalType": "uint256"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "bestTombstoneBlock",
+  "type": "function",
+  "inputs": [
+   {
+    "name": "",
+    "type": "uint32",
+    "internalType": "uint32"
+   },
+   {
+    "name": "",
+    "type": "address",
+    "internalType": "address"
+   }
+  ],
+  "outputs": [
+   {
+    "name": "",
+    "type": "uint64",
+    "internalType": "uint64"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "beta",
+  "type": "function",
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "",
+    "type": "uint8",
+    "internalType": "uint8"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "bonusOf",
+  "type": "function",
+  "inputs": [
+   {
+    "name": "taskId",
+    "type": "uint32",
+    "internalType": "uint32"
+   },
+   {
+    "name": "cost",
+    "type": "uint256",
+    "internalType": "uint256"
+   }
+  ],
+  "outputs": [
+   {
+    "name": "",
+    "type": "uint64",
+    "internalType": "uint64"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "burnEquivOf",
+  "type": "function",
+  "inputs": [
+   {
+    "name": "nandBurn",
+    "type": "uint32",
+    "internalType": "uint32"
+   },
+   {
+    "name": "latchBurn",
+    "type": "uint32",
+    "internalType": "uint32"
+   }
+  ],
+  "outputs": [
+   {
+    "name": "",
+    "type": "uint64",
+    "internalType": "uint64"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "cachedBurn",
+  "type": "function",
+  "inputs": [
+   {
+    "name": "circuits",
+    "type": "address",
+    "internalType": "address"
+   },
+   {
+    "name": "circuitId",
+    "type": "uint256",
+    "internalType": "uint256"
+   }
+  ],
+  "outputs": [
+   {
+    "name": "cached",
+    "type": "bool",
+    "internalType": "bool"
+   },
+   {
+    "name": "nandBurn",
+    "type": "uint32",
+    "internalType": "uint32"
+   },
+   {
+    "name": "latchBurn",
+    "type": "uint32",
+    "internalType": "uint32"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "cachedDepth",
+  "type": "function",
+  "inputs": [
+   {
+    "name": "circuits",
+    "type": "address",
+    "internalType": "address"
+   },
+   {
+    "name": "circuitId",
+    "type": "uint256",
+    "internalType": "uint256"
+   }
+  ],
+  "outputs": [
+   {
+    "name": "cached",
+    "type": "bool",
+    "internalType": "bool"
+   },
+   {
+    "name": "depth",
+    "type": "uint32",
+    "internalType": "uint32"
+   },
+   {
+    "name": "live",
+    "type": "uint32",
+    "internalType": "uint32"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "ceCount",
+  "type": "function",
+  "inputs": [
+   {
+    "name": "taskId",
+    "type": "uint32",
+    "internalType": "uint32"
+   },
+   {
+    "name": "circuits",
+    "type": "address",
+    "internalType": "address"
+   }
+  ],
+  "outputs": [
+   {
+    "name": "",
+    "type": "uint256",
+    "internalType": "uint256"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "challenge",
+  "type": "function",
+  "inputs": [
+   {
+    "name": "key",
+    "type": "bytes32",
+    "internalType": "bytes32"
+   },
+   {
+    "name": "vectorIndex",
+    "type": "uint32",
+    "internalType": "uint32"
+   },
+   {
+    "name": "input",
+    "type": "bytes",
+    "internalType": "bytes"
+   },
+   {
+    "name": "expectedOut",
+    "type": "bytes",
+    "internalType": "bytes"
+   },
+   {
+    "name": "proof",
+    "type": "bytes32[]",
+    "internalType": "bytes32[]"
+   }
+  ],
+  "outputs": [],
+  "stateMutability": "nonpayable"
+ },
+ {
+  "name": "circuitBurn",
+  "type": "function",
+  "inputs": [
+   {
+    "name": "circuits",
+    "type": "address",
+    "internalType": "address"
+   },
+   {
+    "name": "circuitId",
+    "type": "uint256",
+    "internalType": "uint256"
+   }
+  ],
+  "outputs": [
+   {
+    "name": "nandBurn",
+    "type": "uint32",
+    "internalType": "uint32"
+   },
+   {
+    "name": "latchBurn",
+    "type": "uint32",
+    "internalType": "uint32"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "circuitDepth",
+  "type": "function",
+  "inputs": [
+   {
+    "name": "circuits",
+    "type": "address",
+    "internalType": "address"
+   },
+   {
+    "name": "circuitId",
+    "type": "uint256",
+    "internalType": "uint256"
+   }
+  ],
+  "outputs": [
+   {
+    "name": "",
+    "type": "uint32",
+    "internalType": "uint32"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "claim",
+  "type": "function",
+  "inputs": [
+   {
+    "name": "key",
+    "type": "bytes32",
+    "internalType": "bytes32"
+   }
+  ],
+  "outputs": [],
+  "stateMutability": "nonpayable"
+ },
+ {
+  "name": "claimMany",
+  "type": "function",
+  "inputs": [
+   {
+    "name": "keys",
+    "type": "bytes32[]",
+    "internalType": "bytes32[]"
+   }
+  ],
+  "outputs": [],
+  "stateMutability": "nonpayable"
+ },
+ {
+  "name": "commitDesign",
+  "type": "function",
+  "inputs": [
+   {
+    "name": "circuits",
+    "type": "address",
+    "internalType": "address"
+   },
+   {
+    "name": "commitment",
+    "type": "bytes32",
+    "internalType": "bytes32"
+   }
+  ],
+  "outputs": [],
+  "stateMutability": "nonpayable"
+ },
+ {
+  "name": "costOf",
+  "type": "function",
+  "inputs": [
+   {
+    "name": "area",
+    "type": "uint64",
+    "internalType": "uint64"
+   },
+   {
+    "name": "depth",
+    "type": "uint32",
+    "internalType": "uint32"
+   }
+  ],
+  "outputs": [
+   {
+    "name": "c",
+    "type": "uint256",
+    "internalType": "uint256"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "currentRate",
+  "type": "function",
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "",
+    "type": "uint256",
+    "internalType": "uint256"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "designCommitment",
+  "type": "function",
+  "inputs": [
+   {
+    "name": "designer",
+    "type": "address",
+    "internalType": "address"
+   },
+   {
+    "name": "circuits",
+    "type": "address",
+    "internalType": "address"
+   },
+   {
+    "name": "netlistHash",
+    "type": "bytes32",
+    "internalType": "bytes32"
+   },
+   {
+    "name": "salt",
+    "type": "bytes32",
+    "internalType": "bytes32"
+   }
+  ],
+  "outputs": [
+   {
+    "name": "",
+    "type": "bytes32",
+    "internalType": "bytes32"
+   }
+  ],
+  "stateMutability": "pure"
+ },
+ {
+  "name": "designCommits",
+  "type": "function",
+  "inputs": [
+   {
+    "name": "",
+    "type": "address",
+    "internalType": "address"
+   },
+   {
+    "name": "",
+    "type": "bytes32",
+    "internalType": "bytes32"
+   }
+  ],
+  "outputs": [
+   {
+    "name": "blockNumber",
+    "type": "uint64",
+    "internalType": "uint64"
+   },
+   {
+    "name": "firstUnusedId",
+    "type": "uint64",
+    "internalType": "uint64"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "eligibleEpoch",
+  "type": "function",
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "",
+    "type": "uint32",
+    "internalType": "uint32"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "freezeTasks",
+  "type": "function",
+  "inputs": [],
+  "outputs": [],
+  "stateMutability": "nonpayable"
+ },
+ {
+  "name": "getMiner",
+  "type": "function",
+  "inputs": [
+   {
+    "name": "key",
+    "type": "bytes32",
+    "internalType": "bytes32"
+   }
+  ],
+  "outputs": [
+   {
+    "name": "",
+    "type": "tuple",
+    "components": [
+     {
+      "name": "circuits",
+      "type": "address",
+      "internalType": "address"
+     },
+     {
+      "name": "circuitId",
+      "type": "uint64",
+      "internalType": "uint64"
+     },
+     {
+      "name": "taskId",
+      "type": "uint32",
+      "internalType": "uint32"
+     },
+     {
+      "name": "gateCount",
+      "type": "uint32",
+      "internalType": "uint32"
+     },
+     {
+      "name": "stateCount",
+      "type": "uint32",
+      "internalType": "uint32"
+     },
+     {
+      "name": "depth",
+      "type": "uint32",
+      "internalType": "uint32"
+     },
+     {
+      "name": "area",
+      "type": "uint64",
+      "internalType": "uint64"
+     },
+     {
+      "name": "mult",
+      "type": "uint32",
+      "internalType": "uint32"
+     },
+     {
+      "name": "since",
+      "type": "uint64",
+      "internalType": "uint64"
+     },
+     {
+      "name": "status",
+      "type": "uint8",
+      "internalType": "uint8"
+     },
+     {
+      "name": "registrant",
+      "type": "address",
+      "internalType": "address"
+     },
+     {
+      "name": "nandBurn",
+      "type": "uint32",
+      "internalType": "uint32"
+     },
+     {
+      "name": "latchBurn",
+      "type": "uint32",
+      "internalType": "uint32"
+     },
+     {
+      "name": "bstar",
+      "type": "uint64",
+      "internalType": "uint64"
+     },
+     {
+      "name": "bonus",
+      "type": "uint64",
+      "internalType": "uint64"
+     },
+     {
+      "name": "optimal",
+      "type": "bool",
+      "internalType": "bool"
+     },
+     {
+      "name": "commitBlock",
+      "type": "uint64",
+      "internalType": "uint64"
+     },
+     {
+      "name": "firstUnusedId",
+      "type": "uint64",
+      "internalType": "uint64"
+     },
+     {
+      "name": "stopBlock",
+      "type": "uint64",
+      "internalType": "uint64"
+     },
+     {
+      "name": "verifWeight",
+      "type": "uint128",
+      "internalType": "uint128"
+     },
+     {
+      "name": "unverWeight",
+      "type": "uint128",
+      "internalType": "uint128"
+     },
+     {
+      "name": "debt",
+      "type": "uint256",
+      "internalType": "uint256"
+     }
+    ],
+    "internalType": "struct PodMining.Miner"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "getTask",
+  "type": "function",
+  "inputs": [
+   {
+    "name": "taskId",
+    "type": "uint32",
+    "internalType": "uint32"
+   }
+  ],
+  "outputs": [
+   {
+    "name": "",
+    "type": "tuple",
+    "components": [
+     {
+      "name": "kind",
+      "type": "uint8",
+      "internalType": "uint8"
+     },
+     {
+      "name": "cycles",
+      "type": "uint32",
+      "internalType": "uint32"
+     },
+     {
+      "name": "nIn",
+      "type": "uint32",
+      "internalType": "uint32"
+     },
+     {
+      "name": "nOut",
+      "type": "uint32",
+      "internalType": "uint32"
+     },
+     {
+      "name": "vectorCount",
+      "type": "uint32",
+      "internalType": "uint32"
+     },
+     {
+      "name": "active",
+      "type": "bool",
+      "internalType": "bool"
+     },
+     {
+      "name": "vectorsRoot",
+      "type": "bytes32",
+      "internalType": "bytes32"
+     },
+     {
+      "name": "name",
+      "type": "string",
+      "internalType": "string"
+     },
+     {
+      "name": "refArea",
+      "type": "uint64",
+      "internalType": "uint64"
+     },
+     {
+      "name": "refCost",
+      "type": "uint256",
+      "internalType": "uint256"
+     },
+     {
+      "name": "refCircuits",
+      "type": "address",
+      "internalType": "address"
+     },
+     {
+      "name": "refCircuitId",
+      "type": "uint64",
+      "internalType": "uint64"
+     }
+    ],
+    "internalType": "struct PodMining.Task"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "hashrateOf",
+  "type": "function",
+  "inputs": [
+   {
+    "name": "bstar",
+    "type": "uint64",
+    "internalType": "uint64"
+   },
+   {
+    "name": "bonus",
+    "type": "uint64",
+    "internalType": "uint64"
+   },
+   {
+    "name": "mult",
+    "type": "uint256",
+    "internalType": "uint256"
+   }
+  ],
+  "outputs": [
+   {
+    "name": "h",
+    "type": "uint256",
+    "internalType": "uint256"
+   }
+  ],
+  "stateMutability": "pure"
+ },
+ {
+  "name": "initialize",
+  "type": "function",
+  "inputs": [
+   {
+    "name": "owner_",
+    "type": "address",
+    "internalType": "address"
+   },
+   {
+    "name": "token_",
+    "type": "address",
+    "internalType": "address"
+   },
+   {
+    "name": "startTime_",
+    "type": "uint64",
+    "internalType": "uint64"
+   }
+  ],
+  "outputs": [],
+  "stateMutability": "nonpayable"
+ },
+ {
+  "name": "invalidateEligibilityCache",
+  "type": "function",
+  "inputs": [],
+  "outputs": [],
+  "stateMutability": "nonpayable"
+ },
+ {
+  "name": "isSealed",
+  "type": "function",
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "",
+    "type": "bool",
+    "internalType": "bool"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "kick",
+  "type": "function",
+  "inputs": [
+   {
+    "name": "taskId",
+    "type": "uint32",
+    "internalType": "uint32"
+   },
+   {
+    "name": "circuits",
+    "type": "address",
+    "internalType": "address"
+   }
+  ],
+  "outputs": [],
+  "stateMutability": "nonpayable"
+ },
+ {
+  "name": "lambda",
+  "type": "function",
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "",
+    "type": "uint16",
+    "internalType": "uint16"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "lambdaBurn",
+  "type": "function",
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "",
+    "type": "uint16",
+    "internalType": "uint16"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "lastUpdate",
+  "type": "function",
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "",
+    "type": "uint64",
+    "internalType": "uint64"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "maxRunGas",
+  "type": "function",
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "",
+    "type": "uint256",
+    "internalType": "uint256"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "maxSamples",
+  "type": "function",
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "",
+    "type": "uint32",
+    "internalType": "uint32"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "minerCount",
+  "type": "function",
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "",
+    "type": "uint256",
+    "internalType": "uint256"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "minerKey",
+  "type": "function",
+  "inputs": [
+   {
+    "name": "circuits",
+    "type": "address",
+    "internalType": "address"
+   },
+   {
+    "name": "circuitId",
+    "type": "uint256",
+    "internalType": "uint256"
+   }
+  ],
+  "outputs": [
+   {
+    "name": "",
+    "type": "bytes32",
+    "internalType": "bytes32"
+   }
+  ],
+  "stateMutability": "pure"
+ },
+ {
+  "name": "miners",
+  "type": "function",
+  "inputs": [
+   {
+    "name": "",
+    "type": "bytes32",
+    "internalType": "bytes32"
+   }
+  ],
+  "outputs": [
+   {
+    "name": "circuits",
+    "type": "address",
+    "internalType": "address"
+   },
+   {
+    "name": "circuitId",
+    "type": "uint64",
+    "internalType": "uint64"
+   },
+   {
+    "name": "taskId",
+    "type": "uint32",
+    "internalType": "uint32"
+   },
+   {
+    "name": "gateCount",
+    "type": "uint32",
+    "internalType": "uint32"
+   },
+   {
+    "name": "stateCount",
+    "type": "uint32",
+    "internalType": "uint32"
+   },
+   {
+    "name": "depth",
+    "type": "uint32",
+    "internalType": "uint32"
+   },
+   {
+    "name": "area",
+    "type": "uint64",
+    "internalType": "uint64"
+   },
+   {
+    "name": "mult",
+    "type": "uint32",
+    "internalType": "uint32"
+   },
+   {
+    "name": "since",
+    "type": "uint64",
+    "internalType": "uint64"
+   },
+   {
+    "name": "status",
+    "type": "uint8",
+    "internalType": "uint8"
+   },
+   {
+    "name": "registrant",
+    "type": "address",
+    "internalType": "address"
+   },
+   {
+    "name": "nandBurn",
+    "type": "uint32",
+    "internalType": "uint32"
+   },
+   {
+    "name": "latchBurn",
+    "type": "uint32",
+    "internalType": "uint32"
+   },
+   {
+    "name": "bstar",
+    "type": "uint64",
+    "internalType": "uint64"
+   },
+   {
+    "name": "bonus",
+    "type": "uint64",
+    "internalType": "uint64"
+   },
+   {
+    "name": "optimal",
+    "type": "bool",
+    "internalType": "bool"
+   },
+   {
+    "name": "commitBlock",
+    "type": "uint64",
+    "internalType": "uint64"
+   },
+   {
+    "name": "firstUnusedId",
+    "type": "uint64",
+    "internalType": "uint64"
+   },
+   {
+    "name": "stopBlock",
+    "type": "uint64",
+    "internalType": "uint64"
+   },
+   {
+    "name": "verifWeight",
+    "type": "uint128",
+    "internalType": "uint128"
+   },
+   {
+    "name": "unverWeight",
+    "type": "uint128",
+    "internalType": "uint128"
+   },
+   {
+    "name": "debt",
+    "type": "uint256",
+    "internalType": "uint256"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "owner",
+  "type": "function",
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "",
+    "type": "address",
+    "internalType": "address"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "passesCounterexamples",
+  "type": "function",
+  "inputs": [
+   {
+    "name": "circuits",
+    "type": "address",
+    "internalType": "address"
+   },
+   {
+    "name": "circuitId",
+    "type": "uint256",
+    "internalType": "uint256"
+   },
+   {
+    "name": "taskId",
+    "type": "uint32",
+    "internalType": "uint32"
+   },
+   {
+    "name": "gateCount",
+    "type": "uint32",
+    "internalType": "uint32"
+   },
+   {
+    "name": "budget",
+    "type": "uint256",
+    "internalType": "uint256"
+   }
+  ],
+  "outputs": [
+   {
+    "name": "",
+    "type": "bool",
+    "internalType": "bool"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "pause",
+  "type": "function",
+  "inputs": [],
+  "outputs": [],
+  "stateMutability": "nonpayable"
+ },
+ {
+  "name": "paused",
+  "type": "function",
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "",
+    "type": "bool",
+    "internalType": "bool"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "pending",
+  "type": "function",
+  "inputs": [
+   {
+    "name": "key",
+    "type": "bytes32",
+    "internalType": "bytes32"
+   }
+  ],
+  "outputs": [
+   {
+    "name": "",
+    "type": "uint256",
+    "internalType": "uint256"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "poke",
+  "type": "function",
+  "inputs": [],
+  "outputs": [],
+  "stateMutability": "nonpayable"
+ },
+ {
+  "name": "processorMultiplier",
+  "type": "function",
+  "inputs": [
+   {
+    "name": "",
+    "type": "address",
+    "internalType": "address"
+   }
+  ],
+  "outputs": [
+   {
+    "name": "",
+    "type": "uint256",
+    "internalType": "uint256"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "proxiableUUID",
+  "type": "function",
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "",
+    "type": "bytes32",
+    "internalType": "bytes32"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "raiseMaxRunGas",
+  "type": "function",
+  "inputs": [
+   {
+    "name": "newCap",
+    "type": "uint256",
+    "internalType": "uint256"
+   }
+  ],
+  "outputs": [],
+  "stateMutability": "nonpayable"
+ },
+ {
+  "name": "reclaim",
+  "type": "function",
+  "inputs": [
+   {
+    "name": "key",
+    "type": "bytes32",
+    "internalType": "bytes32"
+   }
+  ],
+  "outputs": [],
+  "stateMutability": "nonpayable"
+ },
+ {
+  "name": "refsEligibleAt",
+  "type": "function",
+  "inputs": [
+   {
+    "name": "",
+    "type": "address",
+    "internalType": "address"
+   },
+   {
+    "name": "",
+    "type": "uint256",
+    "internalType": "uint256"
+   }
+  ],
+  "outputs": [
+   {
+    "name": "",
+    "type": "uint32",
+    "internalType": "uint32"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "registerCounterexample",
+  "type": "function",
+  "inputs": [
+   {
+    "name": "taskId",
+    "type": "uint32",
+    "internalType": "uint32"
+   },
+   {
+    "name": "circuits",
+    "type": "address",
+    "internalType": "address"
+   },
+   {
+    "name": "input",
+    "type": "bytes",
+    "internalType": "bytes"
+   }
+  ],
+  "outputs": [],
+  "stateMutability": "nonpayable"
+ },
+ {
+  "name": "renounceOwnership",
+  "type": "function",
+  "inputs": [],
+  "outputs": [],
+  "stateMutability": "nonpayable"
+ },
+ {
+  "name": "runGasFor",
+  "type": "function",
+  "inputs": [
+   {
+    "name": "gateCount",
+    "type": "uint32",
+    "internalType": "uint32"
+   },
+   {
+    "name": "cycles",
+    "type": "uint32",
+    "internalType": "uint32"
+   }
+  ],
+  "outputs": [
+   {
+    "name": "",
+    "type": "uint256",
+    "internalType": "uint256"
+   }
+  ],
+  "stateMutability": "pure"
+ },
+ {
+  "name": "sampleCountFor",
+  "type": "function",
+  "inputs": [
+   {
+    "name": "gateCount",
+    "type": "uint32",
+    "internalType": "uint32"
+   },
+   {
+    "name": "cycles",
+    "type": "uint32",
+    "internalType": "uint32"
+   }
+  ],
+  "outputs": [
+   {
+    "name": "",
+    "type": "uint32",
+    "internalType": "uint32"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "sampleGasBudget",
+  "type": "function",
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "",
+    "type": "uint256",
+    "internalType": "uint256"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "seal",
+  "type": "function",
+  "inputs": [],
+  "outputs": [],
+  "stateMutability": "nonpayable"
+ },
+ {
+  "name": "setProcessor",
+  "type": "function",
+  "inputs": [
+   {
+    "name": "circuits",
+    "type": "address",
+    "internalType": "address"
+   },
+   {
+    "name": "multiplier",
+    "type": "uint256",
+    "internalType": "uint256"
+   }
+  ],
+  "outputs": [],
+  "stateMutability": "nonpayable"
+ },
+ {
+  "name": "start",
+  "type": "function",
+  "inputs": [
+   {
+    "name": "circuits",
+    "type": "address",
+    "internalType": "address"
+   },
+   {
+    "name": "circuitId",
+    "type": "uint256",
+    "internalType": "uint256"
+   },
+   {
+    "name": "taskId",
+    "type": "uint32",
+    "internalType": "uint32"
+   },
+   {
+    "name": "anchorBlock",
+    "type": "uint256",
+    "internalType": "uint256"
+   },
+   {
+    "name": "inputs",
+    "type": "bytes[]",
+    "internalType": "bytes[]"
+   },
+   {
+    "name": "expectedOuts",
+    "type": "bytes[]",
+    "internalType": "bytes[]"
+   },
+   {
+    "name": "proofs",
+    "type": "bytes32[][]",
+    "internalType": "bytes32[][]"
+   },
+   {
+    "name": "salt",
+    "type": "bytes32",
+    "internalType": "bytes32"
+   }
+  ],
+  "outputs": [
+   {
+    "name": "key",
+    "type": "bytes32",
+    "internalType": "bytes32"
+   }
+  ],
+  "stateMutability": "nonpayable"
+ },
+ {
+  "name": "startTime",
+  "type": "function",
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "",
+    "type": "uint64",
+    "internalType": "uint64"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "stop",
+  "type": "function",
+  "inputs": [
+   {
+    "name": "key",
+    "type": "bytes32",
+    "internalType": "bytes32"
+   }
+  ],
+  "outputs": [],
+  "stateMutability": "nonpayable"
+ },
+ {
+  "name": "taskCount",
+  "type": "function",
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "",
+    "type": "uint32",
+    "internalType": "uint32"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "tasks",
+  "type": "function",
+  "inputs": [
+   {
+    "name": "",
+    "type": "uint32",
+    "internalType": "uint32"
+   }
+  ],
+  "outputs": [
+   {
+    "name": "kind",
+    "type": "uint8",
+    "internalType": "uint8"
+   },
+   {
+    "name": "cycles",
+    "type": "uint32",
+    "internalType": "uint32"
+   },
+   {
+    "name": "nIn",
+    "type": "uint32",
+    "internalType": "uint32"
+   },
+   {
+    "name": "nOut",
+    "type": "uint32",
+    "internalType": "uint32"
+   },
+   {
+    "name": "vectorCount",
+    "type": "uint32",
+    "internalType": "uint32"
+   },
+   {
+    "name": "active",
+    "type": "bool",
+    "internalType": "bool"
+   },
+   {
+    "name": "vectorsRoot",
+    "type": "bytes32",
+    "internalType": "bytes32"
+   },
+   {
+    "name": "name",
+    "type": "string",
+    "internalType": "string"
+   },
+   {
+    "name": "refArea",
+    "type": "uint64",
+    "internalType": "uint64"
+   },
+   {
+    "name": "refCost",
+    "type": "uint256",
+    "internalType": "uint256"
+   },
+   {
+    "name": "refCircuits",
+    "type": "address",
+    "internalType": "address"
+   },
+   {
+    "name": "refCircuitId",
+    "type": "uint64",
+    "internalType": "uint64"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "tasksFrozen",
+  "type": "function",
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "",
+    "type": "bool",
+    "internalType": "bool"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "token",
+  "type": "function",
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "",
+    "type": "address",
+    "internalType": "address"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "totalForgone",
+  "type": "function",
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "",
+    "type": "uint256",
+    "internalType": "uint256"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "totalMined",
+  "type": "function",
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "",
+    "type": "uint256",
+    "internalType": "uint256"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "totalUnverWeight",
+  "type": "function",
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "",
+    "type": "uint256",
+    "internalType": "uint256"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "totalVerifWeight",
+  "type": "function",
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "",
+    "type": "uint256",
+    "internalType": "uint256"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "transferOwnership",
+  "type": "function",
+  "inputs": [
+   {
+    "name": "newOwner",
+    "type": "address",
+    "internalType": "address"
+   }
+  ],
+  "outputs": [],
+  "stateMutability": "nonpayable"
+ },
+ {
+  "name": "unpause",
+  "type": "function",
+  "inputs": [],
+  "outputs": [],
+  "stateMutability": "nonpayable"
+ },
+ {
+  "name": "updateTaskRef",
+  "type": "function",
+  "inputs": [
+   {
+    "name": "t",
+    "type": "uint32",
+    "internalType": "uint32"
+   },
+   {
+    "name": "c",
+    "type": "address",
+    "internalType": "address"
+   },
+   {
+    "name": "id",
+    "type": "uint64",
+    "internalType": "uint64"
+   }
+  ],
+  "outputs": [],
+  "stateMutability": "nonpayable"
+ },
+ {
+  "name": "upgradeToAndCall",
+  "type": "function",
+  "inputs": [
+   {
+    "name": "newImplementation",
+    "type": "address",
+    "internalType": "address"
+   },
+   {
+    "name": "data",
+    "type": "bytes",
+    "internalType": "bytes"
+   }
+  ],
+  "outputs": [],
+  "stateMutability": "payable"
+ },
+ {
+  "name": "verifMinerCount",
+  "type": "function",
+  "inputs": [],
+  "outputs": [
+   {
+    "name": "",
+    "type": "uint256",
+    "internalType": "uint256"
+   }
+  ],
+  "stateMutability": "view"
+ },
+ {
+  "name": "warmBurn",
+  "type": "function",
+  "inputs": [
+   {
+    "name": "circuits",
+    "type": "address",
+    "internalType": "address"
+   },
+   {
+    "name": "circuitId",
+    "type": "uint256",
+    "internalType": "uint256"
+   }
+  ],
+  "outputs": [
+   {
+    "name": "nandBurn",
+    "type": "uint32",
+    "internalType": "uint32"
+   },
+   {
+    "name": "latchBurn",
+    "type": "uint32",
+    "internalType": "uint32"
+   }
+  ],
+  "stateMutability": "nonpayable"
+ },
+ {
+  "name": "warmDepth",
+  "type": "function",
+  "inputs": [
+   {
+    "name": "circuits",
+    "type": "address",
+    "internalType": "address"
+   },
+   {
+    "name": "circuitId",
+    "type": "uint256",
+    "internalType": "uint256"
+   }
+  ],
+  "outputs": [
+   {
+    "name": "d",
+    "type": "uint32",
+    "internalType": "uint32"
+   }
+  ],
+  "stateMutability": "nonpayable"
+ },
+ {
+  "name": "warmEligible",
+  "type": "function",
+  "inputs": [
+   {
+    "name": "circuits",
+    "type": "address",
+    "internalType": "address"
+   },
+   {
+    "name": "circuitId",
+    "type": "uint256",
+    "internalType": "uint256"
+   }
+  ],
+  "outputs": [],
+  "stateMutability": "nonpayable"
+ }
+]
