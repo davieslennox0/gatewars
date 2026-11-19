@@ -4,7 +4,7 @@ import { chromium } from "playwright";
 import { mkdirSync } from "node:fs";
 
 const BASE = process.env.BASE ?? "http://localhost:3100";
-const OUT = new URL("../screens/", import.meta.url).pathname;
+const OUT = process.env.OUT ?? new URL("../screens/", import.meta.url).pathname;
 mkdirSync(OUT, { recursive: true });
 const pages = ["/", "/arena/1", "/builder", "/challenges", "/circuits", "/leaderboard", "/me", "/agents", "/rules"];
 const b = await chromium.launch();
