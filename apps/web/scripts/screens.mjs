@@ -21,7 +21,7 @@ for (const [tag, w, h] of [["1440", 1440, 900], ["390", 390, 844]]) {
   if (tag === "390") {
     await p.goto(BASE + "/", { waitUntil: "networkidle" }).catch(() => {});
     await p.waitForTimeout(3000);
-    await p.click('button[aria-label="Open menu"]');
+    await p.click("button.hamburger");
     await p.waitForTimeout(600);
     await p.screenshot({ path: `${OUT}menu-open-390.png` });
     await p.keyboard.press("Escape");
