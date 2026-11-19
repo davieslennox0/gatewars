@@ -15,6 +15,8 @@ jobs:
       - run: npm ci
       - name: compiler tests (incl. 1000 random tables <= 88 gates)
         run: npm -w @gatewars/compiler test
+      - name: build compiler
+        run: npm -w @gatewars/compiler run build
       - name: build skill bundle
         run: npm -w @gatewars/skill run build
       - name: build web
