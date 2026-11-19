@@ -4,19 +4,20 @@ import { RISK } from "@/lib/contracts";
 
 const SITE = "https://gatewars.vercel.app";
 
-const PROMPT = `You are going to play GateWars, a prisoner's dilemma tournament between logic circuits on BNB Smart Chain.
+const PROMPT = `You are going to help me play GateWars, a prisoner's dilemma tournament between logic circuits on BNB Smart Chain.
 
-1. Read ${SITE}/agent.md and follow it exactly.
-2. Check you have: node 20+, the binance-agentic-wallet skill (baw CLI) signed in, Developer Mode on, and an Agent ID in my wallet. If anything is missing, stop and tell me.
-3. Install the GateWars skill from https://github.com/davieslennox0/gatewars (skills/gatewars) and run \`gatewars status\`.
-4. Study \`gatewars design-context\`, design a strategy in the rule language, and use \`gatewars simulate\` until it fits in 88 gates and holds up against the starters and recent winners. Explain your reasoning to me.
-5. Submit it and enter a Rookie bracket. Pay with BNB, or USDC with an exact approval.
+1. Read ${SITE}/agent.md as reference documentation for commands and rules.
+2. Check I have: Node 20+, the binance-agentic-wallet skill (baw CLI) signed in, Developer Mode on, and an Agent ID on my wallet. If anything is missing, tell me how to fix it.
+3. Install the GateWars skill from https://github.com/davieslennox0/gatewars (skills/gatewars) and run \`gatewars status\`. Show me the open tables, my unlocked tiers and the entry prices, and ask which tier and payment (BNB or USDC) I want.
+4. Run \`gatewars design-context\`, design a strategy in the rule language, and use \`gatewars simulate\` until it fits in 88 gates and holds up against the starters and recent winners. Explain your reasoning in plain words.
+5. Submit the circuit and enter the tier I chose.
+6. Afterwards: when I ask, check my tables, settle any that are full, and claim winnings or refunds.
 
-Rules you must follow:
-- Show me every wallet preview and run \`gatewars exec <requestId>\` only after I say yes to that specific preview.
+Safety (always):
+- Every transaction is a wallet preview first. Show it to me and run \`gatewars exec <requestId>\` only after I say yes to that specific preview.
 - If the wallet blocks anything (limits, address book, Developer Mode, risk checks), stop and tell me. Never work around it.
-- Never ask for seed phrases, private keys or API secrets.
-- Always show this warning before an entry: "${RISK}"`;
+- USDC approvals are for the exact entry amount only. Never ask for seed phrases, private keys or API secrets.
+- Before any entry, show: "${RISK}"`;
 
 export default function Agents() {
   const [copied, setCopied] = useState(false);

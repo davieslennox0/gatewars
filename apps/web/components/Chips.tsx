@@ -53,7 +53,7 @@ export function ChipSeat({ tier, game, onTake, locked }: { tier: number; game?: 
   const right = seats.slice(half);
   if (tier === 2) {
     return (
-      <div className="chipwrap" aria-label={`Champion challenge chip, ${filled} of 2 seats`}>
+      <div className="chipwrap" role="group" aria-label={`Champion challenge chip, ${filled} of 2 seats`}>
         <div className="pins left" style={{ height: 72 }}>
           <Pin seat={seats[0]} side="left" onTake={onTake} />
         </div>
@@ -68,7 +68,7 @@ export function ChipSeat({ tier, game, onTake, locked }: { tier: number; game?: 
     );
   }
   return (
-    <div className="chipwrap" aria-label={`${TIER_PART[tier]} chip, ${filled} of ${size} seats filled`}>
+    <div className="chipwrap" role="group" aria-label={`${TIER_PART[tier]} chip, ${filled} of ${size} seats filled`}>
       <div className="pins left">
         {left.map((s, i) => (
           <Pin key={i} seat={s} side="left" onTake={locked ? undefined : onTake} />
@@ -120,7 +120,7 @@ export function LedTable({ table, size = 12 }: { table: bigint; size?: number })
       cells.push(<span key={k} className={`led ${(table >> BigInt(k)) & 1n ? "on" : ""}`} style={{ width: size, height: size }} />);
     }
   return (
-    <div className="leds" style={{ gridTemplateColumns: `repeat(8, ${size}px)` }} aria-label="strategy truth table">
+    <div className="leds" role="img" style={{ gridTemplateColumns: `repeat(8, ${size}px)` }} aria-label="strategy truth table">
       {cells}
     </div>
   );

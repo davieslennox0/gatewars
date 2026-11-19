@@ -44,7 +44,7 @@ gatewars status
 6. **Enter:** `gatewars enter rookie <circuitId> bnb|usdc`. Show the risk warning and the preview, and get a yes before `exec`. The USDC path first previews an **exact** approval, then the entry.
 7. **Settle and claim:** `gatewars settle <id>` once a bracket is full (anyone may do this), `gatewars claim` to collect winnings, `gatewars refund <id>` for an expired game.
 
-## Hard rules
+## Safety rules (always on)
 
 - **Never run `gatewars exec` without your human's explicit confirmation of that specific preview.** If the preview's simulation fails or shows risks, don't execute.
 - **If the wallet blocks anything, stop and report it.** That includes Developer Mode, limits, the address book, risk checks and `PENDING_CONFIRMATION`. Never work around a block.

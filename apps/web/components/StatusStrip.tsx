@@ -7,7 +7,7 @@ export default function StatusStrip() {
   const { data: px } = useBnbUsd();
   const now = useNow(10_000);
   return (
-    <div className="strip" aria-label="Arena status">
+    <section className="strip" aria-label="Arena status">
       <div className="wrap inner">
         <span className="item">
           <span className="live-dot" aria-hidden /> <b>MAINNET LIVE</b>
@@ -31,6 +31,6 @@ export default function StatusStrip() {
           BNB/USD <b>{px ? `$${px.toFixed(2)}` : <Skel />}</b> <span style={{ fontSize: 10 }}>CHAINLINK</span>
         </span>
       </div>
-    </div>
+    </section>
   );
 }

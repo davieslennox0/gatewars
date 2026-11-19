@@ -10,7 +10,11 @@ export const fmtUsd8 = (x: bigint) => `$${(Number(x) / 1e8).toFixed(2)}`;
 export const TIER_PART = ["GW-R8", "GW-P4", "GW-C2"];
 
 export function Skel({ w = 52 }: { w?: number }) {
-  return <span className="skel" style={{ width: w }} aria-label="loading" />;
+  return (
+    <span className="skel" style={{ width: w }} role="status">
+      <span className="sr-only">loading</span>
+    </span>
+  );
 }
 
 export function RiskBanner() {

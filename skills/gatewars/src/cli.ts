@@ -227,7 +227,7 @@ async function simple(fn: "settle" | "expire" | "claimRefund" | "claim", id?: st
 
 async function exec(requestId?: string) {
   if (!requestId) throw new Error("usage: exec <requestId>  (only after the user confirmed the preview)");
-  const r = execute(requestId);
+  const r = execute(requestId); // refuses request IDs this skill did not create
   out(`status ${r.status}${r.txHash ? ` tx ${r.txHash}` : ""}`);
   if (r.status !== "BROADCASTED" || !r.txHash) {
     out("Not broadcast (e.g. PENDING_CONFIRMATION in the Binance App, or blocked). Stop and tell the user.");

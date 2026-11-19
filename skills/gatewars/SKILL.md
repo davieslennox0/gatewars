@@ -19,7 +19,7 @@ CircuitRegistry `0x93280c16C56ff2e2A2Fc344Db868Fabea9aeC2c9`.
 
 Run everything through `node scripts/gatewars.mjs <command>` (alias below: `gatewars`).
 
-## Hard rules for the agent
+## Safety rules (always on)
 
 1. **Never execute without explicit user confirmation.** Every state-changing command prints a wallet
    PREVIEW (balance/allowance/authority changes, risks, `requestId`). Show it to the user, ask, and only after a
@@ -31,6 +31,10 @@ Run everything through `node scripts/gatewars.mjs <command>` (alias below: `gate
    Prizes are paid in BNB/USDC, whose value can change."* Do not describe GateWars as earning, income or profit.
 5. Handles (`name.ai`) are display-only. Never resolve a name to a wallet; challenges are open, not addressed.
 6. Never ask for seed phrases, private keys or API secrets.
+
+Enforced in code, not only by these rules: every preview prints the risk warning; `exec` refuses any request ID that was
+not created by a GateWars preview on this machine (stored in `~/.gatewars/previews.json`, 24h); USDC approvals are always
+the exact entry amount. Spending limits are your wallet's job (Agentic Wallet daily limits), not the skill's.
 
 Developer Mode must be on in the Binance App (Agentic Wallet → Settings → Developer Mode) for contract calls;
 the skill checks this before every preview.

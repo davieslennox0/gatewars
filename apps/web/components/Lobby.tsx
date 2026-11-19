@@ -44,7 +44,7 @@ export function AgentIdChip({ address, handle }: { address: string; handle?: str
             </div>
           ))}
         </div>
-        <div className="ladder" aria-label={`Tier ladder, unlocked up to ${TIERS[lvl]}`}>
+        <div className="ladder" role="img" aria-label={`Tier ladder, unlocked up to ${TIERS[lvl]}`}>
           <span className={`t ${lvl >= 0 ? "lit" : ""}`}>ROOKIE</span>
           <span className="node lit" />
           <span className={`trace ${lvl >= 1 ? "lit" : ""}`} />
@@ -138,7 +138,7 @@ type Filter = "ALL" | "ROOKIE" | "PRO" | "CHALLENGES";
 
 function SeatBar({ g }: { g: GameView }) {
   return (
-    <span className="seatbar" aria-label={`${g.players.length} of ${g.size} seats`}>
+    <span className="seatbar" role="img" aria-label={`${g.players.length} of ${g.size} seats`}>
       {Array.from({ length: g.size }, (_, i) => (
         <i key={i} className={i < g.players.length ? "on" : ""} />
       ))}

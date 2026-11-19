@@ -5,6 +5,31 @@
  * If the wallet blocks anything (limits, Developer Mode, risk checks), we stop and report it.
  */
 import { spawnSync } from "node:child_process";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { homedir } from "node:os";
+import { join } from "node:path";
+import { RISK } from "./chain.js";
+
+// Request IDs this skill created (exec refuses anything else). Kept locally, never sent anywhere.
+const STORE_DIR = join(homedir(), ".gatewars");
+const STORE = join(STORE_DIR, "previews.json");
+type Rec = { requestId: string; label: string; to: string; value: string; at: number };
+function loadRecs(): Rec[] {
+  try {
+    return existsSync(STORE) ? (JSON.parse(readFileSync(STORE, "utf8")) as Rec[]) : [];
+  } catch {
+    return [];
+  }
+}
+function saveRec(r: Rec) {
+  mkdirSync(STORE_DIR, { recursive: true });
+  const all = loadRecs().filter((x) => Date.now() - x.at < 24 * 3600_000);
+  all.push(r);
+  writeFileSync(STORE, JSON.stringify(all, null, 1), { mode: 0o600 });
+}
+export function ownRequest(requestId: string): Rec | undefined {
+  return loadRecs().find((r) => r.requestId === requestId);
+}
 import type { Address, Hex } from "viem";
 
 const BAW = process.env.BAW_BIN ?? "baw";
@@ -59,7 +84,9 @@ export function preview(from: Address, to: Address, data: Hex, valueWei: bigint,
   const sr = p.simulationResult ?? {};
   const changes = (sr.balanceChanges ?? []).map((c: any) => `${c.tokenType === "Native" ? "BNB" : c.contractAddress} ${c.change}`);
   const risks = p.risks?.riskDetails ?? [];
+  if (p.requestId) saveRec({ requestId: p.requestId, label, to, value: valueWei.toString(), at: Date.now() });
   const lines = [
+    `RISK: ${RISK}`,
     `PREVIEW: ${label}`,
     `  to ${to}  value ${valueWei} wei`,
     `  simulation ${sr.simulationCode ?? "?"}${sr.simulationErrorDetail ? ` (${sr.simulationErrorDetail})` : ""}`,
@@ -75,6 +102,8 @@ export function preview(from: Address, to: Address, data: Hex, valueWei: bigint,
 }
 
 export function execute(requestId: string): { status: string; txHash?: Hex } {
+  const own = ownRequest(requestId);
+  if (!own) throw new Error(`refusing to execute ${requestId}: it was not created by a GateWars preview on this machine. Run the GateWars command again to get a fresh preview.`);
   const r = baw(["contract-call", "execute", "--requestId", requestId]);
   return { status: r.status, txHash: r.txHash };
 }
