@@ -1,0 +1,60 @@
+# forge test (all suites incl. BSC fork), 2026-11-19T09:14:18Z, forge Version: 1.9.0, fork RPC blastapi
+Ran 21 tests for test/Arena.t.sol:ArenaTest
+[PASS] test_agentGate() (gas: 230880)
+[PASS] test_badRoundAndAnswerRevert() (gas: 201417)
+[PASS] test_challengeExpiryRefund() (gas: 22295074)
+[PASS] test_championFlowAndTieSplit() (gas: 22695124)
+[PASS] test_championWinner() (gas: 22254681)
+[PASS] test_circuitOwnership() (gas: 979065)
+[PASS] test_expiryFullRefundsEvenIfPriceMoved() (gas: 1774228)
+[PASS] test_oneEntryPerBracket() (gas: 587198)
+[PASS] test_overpayRefundsExcessExactly() (gas: 548779)
+[PASS] test_ownerPowersBounded() (gas: 4197271)
+[PASS] test_pauseNeverBlocksSettleClaimRefund() (gas: 4420029)
+[PASS] test_proUnlock() (gas: 3993515)
+[PASS] test_quoteMath() (gas: 46082)
+[PASS] test_rookieMixedBracket() (gas: 4686228)
+[PASS] test_settleOnlyWhenFull() (gas: 517649)
+[PASS] test_staleOpenBracketRollsOver() (gas: 1057066)
+[PASS] test_stalePriceReverts() (gas: 664895)
+[PASS] test_tieBreak_headToHeadThenEarliest() (gas: 110877)
+[PASS] test_underpayAndZeroRevert() (gas: 298277)
+[PASS] test_usdcInsufficientAllowanceReverts() (gas: 258452)
+[PASS] test_usdcWithValueReverts() (gas: 258826)
+Suite result: ok. 21 passed; 0 failed; 0 skipped; finished in 112.61ms (110.88ms CPU time)
+Ran 3 tests for test/Arena.t.sol:DuelEngineTest
+[PASS] testFuzz_symmetry(uint64,uint64) (runs: 256, μ: 23754, ~: 23754)
+[PASS] test_moves() (gas: 23180)
+[PASS] test_scores() (gas: 34805)
+Suite result: ok. 3 passed; 0 failed; 0 skipped; finished in 23.70ms (23.59ms CPU time)
+Ran 1 test for test/Invariant.t.sol:ArenaInvariantTest
+[PASS]
+ArenaInvariantTest invariants:
+[PASS] invariant_bnbSolvent
+[PASS] invariant_usdcSolvent
+ ArenaInvariantTest invariants (runs: 128, calls: 8192, reverts: 0)
+Suite result: ok. 1 passed; 0 failed; 0 skipped; finished in 1.15s (1.14s CPU time)
+Ran 9 tests for test/Fork.t.sol:ForkTest
+[PASS] test_fork_agentGateRealContract() (gas: 1919176)
+[PASS] test_fork_gas_submit() (gas: 15802154)
+  GAS submitCircuit 2-gate 1417334
+  GAS submitCircuit 88-gate 14057314
+[PASS] test_fork_mixedRookieBracketAndGas() (gas: 5238580)
+  GAS enter BNB (opens bracket, excess refund) 326780
+  GAS enter USDC (first entry, opens bracket) 239515
+  GAS enter BNB (mid bracket, excess refund) 206492
+  GAS enter USDC (mid bracket) 205331
+  GAS enter BNB (last entry -> FULL) 213650
+  GAS settle ROOKIE (8p, 28 matches x 20 rounds) 824235
+  GAS claim (BNB + USDC) 86850
+[PASS] test_fork_overpayRefundAndRefundAfterPriceMove() (gas: 786799)
+[PASS] test_fork_proAndChampionGas() (gas: 23701721)
+  GAS settle PRO (4p, 6 matches x 20 rounds) 232657
+  GAS createChallenge BNB 348487
+  GAS acceptChallenge USDC (plays match, tie split) 388708
+[PASS] test_fork_quoteMatchesFeed() (gas: 55450)
+[PASS] test_fork_stalePriceReverts() (gas: 37093)
+[PASS] test_fork_submitCacheMatchesDirectEval() (gas: 36273393)
+[PASS] test_fork_submitFeeAndCaps() (gas: 2119457)
+Suite result: ok. 9 passed; 0 failed; 0 skipped; finished in 2.21s (1.75s CPU time)
+Ran 4 test suites in 2.21s (3.49s CPU time): 34 tests passed, 0 failed, 0 skipped (34 total tests)
