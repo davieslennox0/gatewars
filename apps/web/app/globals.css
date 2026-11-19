@@ -197,3 +197,11 @@ footer { border-top: 1px solid var(--line); padding: 28px 20px; color: var(--dim
   .podium { grid-template-columns: 1fr; }
   .grid-2 { grid-template-columns: 1fr; }
 }
+
+/* fixes after visual review */
+.mono, code, .code, table, .num, textarea, .prompt, select, input { font-variant-ligatures: none; font-feature-settings: "liga" 0, "calt" 0; }
+.gate > .row.between:first-child { flex-wrap: nowrap; align-items: flex-start; }
+.gate > .row.between:first-child > .row { flex-wrap: nowrap; min-width: 0; }
+.gate .fee { font-size: 24px; white-space: nowrap; }
+.section-title { flex-wrap: wrap; gap: 6px 16px; }
+@media (max-width: 640px) { .gate .fee { font-size: 20px; } .gate .tier-name { font-size: 19px; } }
