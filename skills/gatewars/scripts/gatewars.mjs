@@ -20557,7 +20557,7 @@ var STARTER_IDS = { TIT_FOR_TAT: 1n, GRIM_TRIGGER: 2n, ALWAYS_DEFECT: 3n };
 var TIERS = ["ROOKIE", "PRO", "CHAMPION"];
 var ASSETS = ["BNB", "USDC"];
 var STATES = ["NONE", "OPEN", "FULL", "SETTLED", "EXPIRED"];
-var RISK = "Skill tournament. Entry fees can be lost. No returns are promised. Prizes are paid in BNB/USDC whose value can change.";
+var RISK = "Skill tournament. Entry fees can be lost. No returns are promised. Prizes are paid in BNB/USDC, whose value can change.";
 var arenaAbi = parseAbi([
   "function enter(uint8 tier, uint256 circuitId, uint8 asset) payable returns (uint256)",
   "function createChallenge(uint256 circuitId, uint8 asset) payable returns (uint256)",
@@ -20608,10 +20608,31 @@ var client = createPublicClient({
   chain: bsc,
   transport: http(process.env.GATEWARS_RPC ?? "https://bsc-dataseed.bnbchain.org")
 });
-var API = process.env.GATEWARS_API ?? "https://api.gatewars.xyz";
+var API = process.env.GATEWARS_API ?? "https://api.pitchook.xyz";
 
 // src/wallet.ts
 import { spawnSync } from "node:child_process";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { homedir } from "node:os";
+import { join } from "node:path";
+var STORE_DIR = join(homedir(), ".gatewars");
+var STORE = join(STORE_DIR, "previews.json");
+function loadRecs() {
+  try {
+    return existsSync(STORE) ? JSON.parse(readFileSync(STORE, "utf8")) : [];
+  } catch {
+    return [];
+  }
+}
+function saveRec(r) {
+  mkdirSync(STORE_DIR, { recursive: true });
+  const all = loadRecs().filter((x) => Date.now() - x.at < 24 * 36e5);
+  all.push(r);
+  writeFileSync(STORE, JSON.stringify(all, null, 1), { mode: 384 });
+}
+function ownRequest(requestId) {
+  return loadRecs().find((r) => r.requestId === requestId);
+}
 var BAW = process.env.BAW_BIN ?? "baw";
 function baw(args) {
   const r = spawnSync(BAW, [...args, "--json"], { encoding: "utf8", timeout: 12e4 });
@@ -20663,7 +20684,9 @@ function preview(from15, to, data, valueWei, label) {
   const sr = p.simulationResult ?? {};
   const changes = (sr.balanceChanges ?? []).map((c) => `${c.tokenType === "Native" ? "BNB" : c.contractAddress} ${c.change}`);
   const risks = p.risks?.riskDetails ?? [];
+  if (p.requestId) saveRec({ requestId: p.requestId, label, to, value: valueWei.toString(), at: Date.now() });
   const lines = [
+    `RISK: ${RISK}`,
     `PREVIEW: ${label}`,
     `  to ${to}  value ${valueWei} wei`,
     `  simulation ${sr.simulationCode ?? "?"}${sr.simulationErrorDetail ? ` (${sr.simulationErrorDetail})` : ""}`,
@@ -20678,6 +20701,8 @@ function preview(from15, to, data, valueWei, label) {
   return { requestId: p.requestId, summary: lines.join("\n"), raw: p };
 }
 function execute(requestId) {
+  const own = ownRequest(requestId);
+  if (!own) throw new Error(`refusing to execute ${requestId}: it was not created by a GateWars preview on this machine. Run the GateWars command again to get a fresh preview.`);
   const r = baw(["contract-call", "execute", "--requestId", requestId]);
   return { status: r.status, txHash: r.txHash };
 }
