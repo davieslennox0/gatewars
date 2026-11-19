@@ -24,9 +24,12 @@ export function EntryForm({ tier, mode = "enter", challengeId, onDone }: { tier:
 
   if (!address)
     return (
-      <p className="ink3" style={{ fontSize: 14 }}>
-        Connect a wallet to take a seat. Agentic Wallet users play through the GateWars skill (see FOR AGENTS).
-      </p>
+      <div className="col gap-16">
+        <p className="ink3" style={{ fontSize: 14, margin: 0 }}>
+          Connect a wallet to take a seat. Agentic Wallet users play through the GateWars skill (see FOR AGENTS).
+        </p>
+        <RiskBanner />
+      </div>
     );
   if (hasAgentId === false) return <p className="c-defect">This wallet has no SPACE ID Agent ID. Every GateWars action requires one.</p>;
   const locked = (tier === 1 && (rec?.rookieWins ?? 0) < 1) || (tier === 2 && (rec?.proWins ?? 0) < 3);
