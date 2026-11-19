@@ -33,8 +33,12 @@ export default function MatchPage({ params }: { params: { id: string } }) {
 
   if (isLoading || !g)
     return (
-      <div style={{ marginTop: 40 }}>
+      <div style={{ minHeight: "150vh", paddingTop: 32 }} aria-busy="true">
         <Skel w={240} />
+        <div className="grid-2" style={{ marginTop: 20 }}>
+          <div className="panel" style={{ height: 420 }} />
+          <div className="panel" style={{ height: 420 }} />
+        </div>
       </div>
     );
   if (g.openedAt === 0) return <p style={{ marginTop: 40 }}>Table #{params.id} does not exist.</p>;
