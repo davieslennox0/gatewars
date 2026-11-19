@@ -81,8 +81,8 @@ contract Handler is Test {
 
     function warpAndExpire(uint256 idx, uint256 dt) external {
         dt = dt % 2 days;
-        vm.warp(block.timestamp + dt);
-        feed.set(int256(300e8 + int256(dt % 600e8)), block.timestamp); // price moves, stays fresh
+        vm.warp(vm.getBlockTimestamp() + dt);
+        feed.set(int256(300e8 + int256(dt % 600e8)), vm.getBlockTimestamp()); // price moves, stays fresh
         if (ids.length == 0) return;
         try arena.expire(ids[idx % ids.length]) {} catch {}
     }

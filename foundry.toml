@@ -23,3 +23,6 @@ bsc = "${BSC_RPC_URL}"
 
 [etherscan]
 bsc = { key = "${BSCSCAN_API_KEY}", chain = 56, url = "https://api.etherscan.io/v2/api?chainid=56" }
+
+[lint]
+lint_on_build = false

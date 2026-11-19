@@ -210,8 +210,8 @@ contract ArenaTest is ArenaBase {
 
     function test_stalePriceReverts() public {
         address p = agent();
-        feed.set(600e8, block.timestamp);
-        vm.warp(block.timestamp + 1 hours + 1);
+        feed.set(600e8, vm.getBlockTimestamp());
+        vm.warp(vm.getBlockTimestamp() + 1 hours + 1);
         vm.expectRevert(Arena.StalePrice.selector);
         arena.quoteEntry(Arena.Tier.ROOKIE);
         vm.prank(p);
@@ -232,10 +232,10 @@ contract ArenaTest is ArenaBase {
         feed.setRounds(5, 4);
         vm.expectRevert(Arena.StalePrice.selector);
         arena.price();
-        feed.set(0, block.timestamp);
+        feed.set(0, vm.getBlockTimestamp());
         vm.expectRevert(Arena.BadPrice.selector);
         arena.price();
-        feed.set(-1, block.timestamp);
+        feed.set(-1, vm.getBlockTimestamp());
         vm.expectRevert(Arena.BadPrice.selector);
         arena.price();
     }
@@ -418,8 +418,8 @@ contract ArenaTest is ArenaBase {
         usdc.approve(address(arena), qu);
         uint256 cid = arena.createChallenge(TFT, Arena.PayAsset.USDC);
         vm.stopPrank();
-        vm.warp(block.timestamp + 24 hours);
-        feed.set(600e8, block.timestamp);
+        vm.warp(vm.getBlockTimestamp() + 24 hours);
+        feed.set(600e8, vm.getBlockTimestamp());
         (uint256 q,) = arena.quoteEntry(Arena.Tier.CHAMPION);
         vm.prank(y);
         vm.expectRevert(Arena.Expired_.selector);
@@ -445,8 +445,8 @@ contract ArenaTest is ArenaBase {
         enterBnb(c, Arena.Tier.ROOKIE, GRIM);
         vm.expectRevert(Arena.NotExpired.selector);
         arena.expire(id);
-        vm.warp(block.timestamp + 24 hours);
-        feed.set(300e8, block.timestamp); // BNB halves
+        vm.warp(vm.getBlockTimestamp() + 24 hours);
+        feed.set(300e8, vm.getBlockTimestamp()); // BNB halves
         arena.expire(id);
         assertEq(arena.openBracket(Arena.Tier.ROOKIE), 0);
 
@@ -472,8 +472,8 @@ contract ArenaTest is ArenaBase {
     function test_staleOpenBracketRollsOver() public {
         address a = agent();
         uint256 id = enterBnb(a, Arena.Tier.ROOKIE, TFT);
-        vm.warp(block.timestamp + 24 hours);
-        feed.set(600e8, block.timestamp);
+        vm.warp(vm.getBlockTimestamp() + 24 hours);
+        feed.set(600e8, vm.getBlockTimestamp());
         uint256 id2 = enterBnb(agent(), Arena.Tier.ROOKIE, TFT);
         assertTrue(id2 != id);
         assertEq(uint8(arena.game(id).state), uint8(Arena.State.EXPIRED));
@@ -505,7 +505,7 @@ contract ArenaTest is ArenaBase {
         arena.settle(id); // works while paused
         vm.prank(ps[0]);
         arena.claim(); // works while paused
-        vm.warp(block.timestamp + 24 hours);
+        vm.warp(vm.getBlockTimestamp() + 24 hours);
         arena.expire(pid); // works while paused
         vm.prank(lone);
         arena.claimRefund(pid); // works while paused
