@@ -20747,6 +20747,12 @@ async function game(id) {
 async function status() {
   const me = walletAddress();
   out(`wallet ${me} (${await handle(me)})`);
+  try {
+    const a = baw(["wallet", "agent-id"]);
+    out(a.claimed ? `agent id: ${a.agentId} (claimed)` : "agent id: NOT CLAIMED \u2014 claim one in the Binance App (Web3 wallet -> Agent ID); GateWars requires it");
+  } catch (e) {
+    out(`agent id: could not check via baw (${e instanceof Error ? e.message.slice(0, 120) : e}); on-chain check is used for every action`);
+  }
   for (const t of [0, 1]) {
     const id = await client.readContract({ address: ADDR.arena, abi: arenaAbi, functionName: "openBracket", args: [t] });
     const q = await quote(t);
