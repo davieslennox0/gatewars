@@ -73,7 +73,7 @@ export const client = createPublicClient({
 });
 
 /** Indexer API (history: matches, winners, leaderboard). */
-export const API = process.env.GATEWARS_API ?? "https://api.gatewars.xyz";
+export const API = process.env.GATEWARS_API ?? "https://api.pitchook.xyz";
 
 export async function api<T>(path: string): Promise<T | null> {
   try {
